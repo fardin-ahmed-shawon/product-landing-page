@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>WATCH - Product Landing Page</title>
+        <title>Easy Tech Solutions - Product Landing Page</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Product Landing Page" name="keywords">
         <meta content="Product Landing Page" name="description">
@@ -20,6 +20,8 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/checkout.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -36,6 +38,7 @@
                         <li><a href="#feature">Features</a></li>
                         <li><a href="#process">How Works</a></li>
                         <li><a href="#products">Products</a></li>
+                        <li><a href="#checkout">Checkout</a></li>
                         <li><a href="#testimonials">Reviews</a></li>
                         <li><a href="#faqs">FAQs</a></li>
                     </ul>
@@ -57,7 +60,7 @@
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Read & reply to messages</li>
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Compatible with all devices</li>
                             </ul>
-                            <a class="btn" href="#">Order Now</a>
+                            <a class="btn" href="#products">Order Now</a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -208,7 +211,7 @@
                             <div class="product-content">
                                 <h2>Sports Edition</h2>
                                 <h3>$149</h3>
-                                <a class="btn" href="#">Buy Now</a>
+                                <a class="btn" href="#">Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -220,7 +223,7 @@
                             <div class="product-content">
                                 <h2>Sports Edition</h2>
                                 <h3>$199</h3>
-                                <a class="btn" href="#">Buy Now</a>
+                                <a class="btn" href="#">Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -232,7 +235,7 @@
                             <div class="product-content">
                                 <h2>Sports Edition</h2>
                                 <h3>$249</h3>
-                                <a class="btn" href="#">Buy Now</a>
+                                <a class="btn" href="#">Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -244,7 +247,7 @@
                             <div class="product-content">
                                 <h2>Sports Edition</h2>
                                 <h3>$299</h3>
-                                <a class="btn" href="#">Buy Now</a>
+                                <a class="btn" href="#">Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -252,13 +255,190 @@
             </div>
         </div>
         <!-- Products End -->
+
+
+        <!-- Checkout Start -->
+        <div id="checkout">
+            <div class="container" id="products">
+                <div class="section-header">
+                    <h2>Checkout</h2>
+                    <p>
+                        Place your order now and get a discount. Hurry up! Limited time offer.
+                    </p>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <div class="product-single">
+                            <div class="row">
+                                <div class="col-md-6 text-left">
+                                    <h4>Billing Address</h4>
+                                    <br>
+                                    <div class="content">
+                                        <!-- input form -->
+                                        <form action="" method="post" enctype="multipart/form-data">
+                                            <div class="user-details full-input-box">
+                                                <!-- Input for First Name -->
+                                                <div class="input-box form-group">
+                                                    <span class="details">First Name<i class="text-danger">*</i></span>
+                                                    <input class="form-control" name="firstName" type="text" placeholder="Enter your first name" required="">
+                                                </div>
+                                                <!-- Input for Lasat Name -->
+                                                <div class="input-box form-group">
+                                                    <span class="details">Last Name<i class="text-danger">*</i></span>
+                                                    <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" required="">
+                                                </div>
+                                                <!-- Input for phone number -->
+                                                <div class="input-box form-group">
+                                                    <span class="details">Phone Number<i class="text-danger">*</i></span>
+                                                    <input class="form-control" minlength="11" name="phone" type="text" placeholder="Enter your number" required="">
+                                                </div>
+                                                <!-- Input for email number -->
+                                                <div class="input-box form-group">
+                                                    <span class="details">Email</span>
+                                                    <input class="form-control" name="email" type="email" placeholder="Enter your email">
+                                                </div>
+                                                <!-- Input for address -->
+                                                <div class="input-box form-group">
+                                                    <span class="details">Address<i class="text-danger">*</i></span>
+                                                    <input class="form-control" name="address" type="text" placeholder="Enter your address" required="">
+                                                </div><br>
+                                                <!-- Input for city -->
+                                                <div class="radio-input-box form-group">
+                                                    <span class="details">Choose Your Delivery Location<i class="text-danger">*</i></span>
+                                                    <br>
+                                                    <input name="city" type="radio" id="dhaka" value="Inside Dhaka" checked="">
+                                                    <label for="dhaka">Inside Dhaka</label>
+                                                    <br>
+                                                    <input name="city" type="radio" id="outside" value="Outside Dhaka">
+                                                    <label for="outside">Outside Dhaka</label>
+                                                    <br><br>
+                                                    <i>
+                                                        <p class="text-muted">* Delivery Charge Inside Dhaka 80 ৳</p>
+                                                        <p class="text-muted">* Delivery Charge Outside Dhaka 150 ৳</p>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-left">
+                                    <div>
+                                        <h4>Your Order</h4>
+                                        <br>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="order-list">
+                                                    <div class="order-titles">
+                                                        <h5>Products</h5>
+                                                        <h5>Subtotal</h5>
+                                                    </div><hr>
+                                                    <div class="order-items" id="order-items">
+                                                        <!-- Cart item will add dynamically -->
+
+                                                        <div class="order-item">
+                                                            <div class="order-product-info">
+                                                                <div class="cart-box" id="2">
+                                                                    <img style="width: 60px; height: 60px;" src="img/product-1.png" alt="cart-img">
+                                                                    <div class="cart-details ml-3">
+                                                                        <h5 class="cart-product-title">Mens Premium Shirt - Urban</h5>
+                                                                        <!--
+                                                                        <h2 class="cart-product-title product-size">Size: XL</h2>
+                                                                        -->
+                                                                        <div class="cart-quantity">
+                                                                            <button class="decrement" id="decrement">-</button>
+                                                                            <span class="number">1</span>
+                                                                            <button class="increment" id="increment">+</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="order-product-price amount">৳ 2290</div>
+                                                        </div>
+
+                                                        <hr>
+
+                                                        <div class="order-item">
+                                                            <div class="order-product-info">
+                                                                <div class="cart-box" id="1">
+                                                                    <img style="width: 60px; height: 60px;" src="img/product-2.png" alt="cart-img">
+                                                                    <div class="cart-details ml-3">
+                                                                        <h5 class="cart-product-title">Mens Premium Shirt - Designer Edition</h5>
+                                                                        <!--
+                                                                        <h2 class="cart-product-title product-size">Size: XL</h2>
+                                                                        -->
+                                                                        <div class="cart-quantity">
+                                                                            <button class="decrement" id="decrement">-</button>
+                                                                            <span class="number">1</span>
+                                                                            <button class="increment" id="increment">+</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="order-product-price amount">৳ 1450</div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="subtotal">
+                                                        <div class="subtotal-title">Subtotal</div>
+                                                        <div class="subtotal-price amount" id="subtotal-price">৳ 3740</div>
+                                                    </div><br>
+                                                    <div class="shipping">
+                                                        <div class="shipping-title">Shipping</div>
+                                                        <div class="shipping-price amount" id="shipping-price">৳ 80</div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="total-product-price">
+                                                        <div class="total-product-price-title">Total</div>
+                                                        <div class="total-product-price-price amount" id="total-price">৳ 3820</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div>
+                                        <h4>Payment Method</h4>
+                                        <br>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="payment-method">
+                                                    <div class="payment-method-title">
+                                                        <h5>Choose Your Payment Method</h5><br>
+                                                        <p>We Accept Cash On Delivery & Mobile Banking.</p>
+                                                    </div>
+                                                    <div class="payment-method-list">
+                                                        <input type="radio" id="bkash" name="payment" value="bkash" checked="">
+                                                        <label for="bkash">bKash</label><br>
+                                                        <input type="radio" id="rocket" name="payment" value="rocket">
+                                                        <label for="rocket">Rocket</label><br>
+                                                        <input type="radio" id="nagad" name="payment" value="nagad">
+                                                        <label for="nagad">Nagad</label><br>
+                                                        <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery">
+                                                        <label for="cash-on-delivery">Cash on Delivery</label><br>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="checkout-btn">
+                                                    <button type="submit" class="btn btn-primary">Place Order</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Checkout End -->
         
         
         <!-- Testimonials Start -->
         <div id="testimonials">
             <div class="container">
                 <div class="section-header">
-                    <h2>99.99% Positive Reviews</h2>
+                    <h2>100% Client Satisfaction</h2>
                     <p>
                         Here are some of the reviews from our customers. We are happy to serve you.
                     </p>
@@ -269,10 +449,10 @@
                             <img src="img/testimonial-1.jpg" alt="">
                         </div>
                         <div class="testimonial-content">
-                            <h3>Christopher Heath</h3>
-                            <h4>Science technician</h4>
+                            <h3>Mehedi H. Jony</h3>
+                            <h4>Business Development Lead</h4>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit massa sit amet
+                                We are very happy with our product. They are using it for a long time and they are satisfied with the product.
                             </p>
                         </div>
                     </div>
@@ -282,10 +462,10 @@
                             <img src="img/testimonial-2.jpg" alt="">
                         </div>
                         <div class="testimonial-content">
-                            <h3>Mollie White</h3>
-                            <h4>Youtuber</h4>
+                            <h3>Ovi Sheikh</h3>
+                            <h4>CEO</h4>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit massa sit amet
+                                Very good product. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
                             </p>
                         </div>
                     </div>
@@ -295,10 +475,10 @@
                             <img src="img/testimonial-3.jpg" alt="">
                         </div>
                         <div class="testimonial-content">
-                            <h3>Tom McKenzie</h3>
-                            <h4>Videographer</h4>
+                            <h3>Abdur Rahim</h3>
+                            <h4>Support Team Leader</h4>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit massa sit amet
+                                Best product ever. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
                             </p>
                         </div>
                     </div>
@@ -308,10 +488,10 @@
                             <img src="img/testimonial-4.jpg" alt="">
                         </div>
                         <div class="testimonial-content">
-                            <h3>Ruby Forster</h3>
-                            <h4>Photographer</h4>
+                            <h3>Shimanto Khan</h3>
+                            <h4>Head of Communication</h4>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit massa sit amet
+                                I am very happy with the product. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
                             </p>
                         </div>
                     </div>
@@ -321,10 +501,10 @@
                             <img src="img/testimonial-5.jpg" alt="">
                         </div>
                         <div class="testimonial-content">
-                            <h3>Leo Conway</h3>
-                            <h4>Relationship manager</h4>
+                            <h3>Md. Sajedur</h3>
+                            <h4>Head of Digital Marketing</h4>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit massa sit amet
+                                Graet product. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
                             </p>
                         </div>
                     </div>
@@ -444,7 +624,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-12">
-                        <p>&copy; Copyright <a href="https://www.easytechx.com/">Easy Tech Solutions</a>. All Rights Reserved</p>
+                        <p>&copy; Copyright <a href="https://www.easytechx.com/" target="_blank">Easy Tech Solutions</a>. All Rights Reserved</p>
                     </div>
                 </div>
             </div>
