@@ -39,40 +39,6 @@
                 </ul>
               </div>
             </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="categories">
-                <span class="menu-title">Product Categories</span>
-                <i class="mdi mdi-table-large menu-icon"></i>
-              </a>
-              <div class="collapse" id="categories">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item">
-                    <a class="nav-link" href="insertCategory.php">Insert Category</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="viewCategory.php">View Category</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="deleteCategory.php">Delete Category</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="slider.php">
-                <span class="menu-title">Slider</span>
-                <i class="mdi mdi-menu-close menu-icon"></i>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="viewCustomers.php">
-                <span class="menu-title">View Customers</span>
-                <i class="mdi mdi-account menu-icon"></i>
-              </a>
-            </li>
 
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#order" aria-expanded="false" aria-controls="order">

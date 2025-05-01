@@ -92,8 +92,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                 <div class="card bg-gradient-info card-img-holder text-white">
                   <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Customers 
-                      <i class="mdi mdi-account mdi-24px float-end"></i>
+                    <h4 class="font-weight-normal mb-3">Total Collection
+                      <i class="mdi mdi-currency-usd mdi-24px float-end"></i>
                     </h4>
                     <h1 class="mb-5">
                       NO
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                 <div class="card bg-gradient-success card-img-holder text-white">
                   <div class="card-body">
                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Product Categories <i class="mdi mdi-apps mdi-24px float-end"></i>
+                    <h4 class="font-weight-normal mb-3">Pending Orders <i class="mdi mdi-apps mdi-24px float-end"></i>
                     </h4>
                     <h1 class="mb-5">
                       NO
