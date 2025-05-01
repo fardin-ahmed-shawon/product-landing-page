@@ -117,39 +117,6 @@
               </div>
             </li>
             
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="categories">
-                <span class="menu-title">Product Categories</span>
-                <i class="mdi mdi-table-large menu-icon"></i>
-              </a>
-              <div class="collapse" id="categories">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item">
-                    <a class="nav-link" href="insertCategory.html">Insert Category</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="viewCategory.html">View Category</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="deleteCategory.html">Delete Category</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="slider.html">
-                <span class="menu-title">Slider</span>
-                <i class="mdi mdi-menu-close menu-icon"></i>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="viewCustomers.html">
-                <span class="menu-title">View Customers</span>
-                <i class="mdi mdi-account menu-icon"></i>
-              </a>
-            </li>
 
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#order" aria-expanded="false" aria-controls="order">
@@ -225,27 +192,15 @@
                           <span class="details">Product Title</span>
                           <input type="text" placeholder="Enter your product title" required>
                         </div>
-                        <!-- price -->
+                        <!-- reg price -->
                         <div class="input-box">
-                          <span class="details">Price</span>
-                          <input type="text" placeholder="Enter your product price" required>
+                          <span class="details">Regular Price</span>
+                          <input type="text" placeholder="Enter your product regular price" required>
                         </div>
-                        <!-- Main Category -->
+                        <!-- sale price -->
                         <div class="input-box">
-                          <span class="details">Choose Main Category</span>
-                          <select>
-                            <option value="Mens">Mens</option>
-                            <option value="Womens">Womens</option>
-                          </select>
-                        </div>
-                        <!-- Sub Category -->
-                        <div class="input-box">
-                          <span class="details">Choose Sub Category</span>
-                          <select>
-                            <option value="Shirt">Shirt</option>
-                            <option value="Pant">Pant</option>
-                            <option value="Panjabi">Panjabi</option>
-                          </select>
+                          <span class="details">Sale Price</span>
+                          <input type="text" placeholder="Enter your product sale price" required>
                         </div>
                         <!-- Total Stock -->
                         <div class="input-box">
@@ -257,69 +212,15 @@
                           <span class="details">Product Keyword</span>
                           <input type="text" placeholder="Enter your product keyword" required>
                         </div>
-                        <!-- Description -->
+                        <!-- code -->
                         <div class="input-box">
-                          <span class="details">Description</span>
-                          <input type="text" placeholder="Enter your product description" required>
-                        </div>
-                        <!-- Size -->
-                        <span class="details">Product Available Size</span>
-                        <div class="input-checkbox">
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="S" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              S
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="M" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              M
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="L" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              L
-                            </label>
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="XL" id="flexCheckChecked">
-                              <label class="form-check-label" for="flexCheckChecked">
-                                XL
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="XXL" id="flexCheckChecked">
-                              <label class="form-check-label" for="flexCheckChecked">
-                                XXL
-                              </label>
-                            </div>
-                          </div>
+                          <span class="details">Product Code</span>
+                          <input type="text" placeholder="Enter your product code" required>
                         </div>
                         <!-- main image -->
                         <div>
                           <span class="details">Attach Primary Image</span>
                           <input type="file" name="file1" id="file" class="inputfile"/><br>
-                        </div>
-                        <!-- image 2 -->
-                        <div>
-                          <span class="details">Attach Image 2</span>
-                          <input type="file" name="file2" id="file" class="inputfile"/><br>
-                        </div>
-                        <!-- image 3 -->
-                        <div>
-                          <span class="details">Attach Image 3</span>
-                          <input type="file" name="file3" id="file" class="inputfile"/><br>
-                        </div>
-                        <!-- image 4 -->
-                        <div>
-                          <span class="details">Attach Image 4</span>
-                          <input type="file" name="file4" id="file" class="inputfile"/><br>
-                        </div>
-                        <!-- image 5 -->
-                        <div>
-                          <span class="details">Attach Image 5</span>
-                          <input type="file" name="file5" id="file" class="inputfile"/><br>
                         </div>
                       </div>
                       <!-- Submit button -->
