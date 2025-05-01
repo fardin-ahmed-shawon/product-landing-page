@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 // database connection
-include('database/dbConnection.php');
+include('../dbConnection.php');
 
 // Update order status to "Processing" if the Accept button is pressed
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
@@ -96,13 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                       <i class="mdi mdi-account mdi-24px float-end"></i>
                     </h4>
                     <h1 class="mb-5">
-                      <?php
-                      // Fetch total customers from user_info table
-                      $sql = "SELECT COUNT(user_id) AS total_customers FROM user_info";
-                      $result = $conn->query($sql);
-                      $row = $result->fetch_assoc();
-                      echo $row['total_customers'];
-                      ?>
+                      NO
                     </h1>
                   </div>
                 </div>
@@ -114,13 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                     <h4 class="font-weight-normal mb-3">Product Categories <i class="mdi mdi-apps mdi-24px float-end"></i>
                     </h4>
                     <h1 class="mb-5">
-                      <?php
-                      // Fetch total categories from category_info table
-                      $sql = "SELECT COUNT(main_ctg_id) AS total_categories FROM main_category";
-                      $result = $conn->query($sql);
-                      $row = $result->fetch_assoc();
-                      echo $row['total_categories'];
-                      ?>
+                      NO
                     </h1>
                   </div>
                 </div>
