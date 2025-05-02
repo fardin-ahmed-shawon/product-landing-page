@@ -79,11 +79,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                   <tbody>
                     <tr>
                       <th>Order No</th>
-                      <th>Customer ID</th>
                       <th>Customer Phone</th>
                       <th>Invoice No</th>
                       <th>Product ID</th>
-                      <th>Size</th>
                       <th>Quantity</th>
                       <th>Total</th>
                       <th>Order Date</th>
@@ -94,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                     
                     <?php
                       // Fetch data from order_info table
-                      $sql = "SELECT order_no, user_id, user_phone, invoice_no, product_id, product_quantity, product_size, total_price, payment_method, order_date, order_status, order_visibility FROM order_info WHERE order_status='Pending' AND order_visibility='Show' ORDER BY order_no DESC";
+                      $sql = "SELECT order_no, user_phone, invoice_no, product_id, product_quantity, total_price, payment_method, order_date, order_status, order_visibility FROM order_info WHERE order_status='Pending' AND order_visibility='Show' ORDER BY order_no DESC";
                       $result = $conn->query($sql);
 
                       if ($result->num_rows > 0) {
@@ -102,11 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                           //if ($row["order_status"] == 'Pending') {
                                 echo "<tr>
                                 <td>$row[order_no]</td>
-                                <td>$row[user_id]</td>
                                 <td>$row[user_phone]</td>
                                 <td>$row[invoice_no]</td>
                                 <td>$row[product_id]</td>
-                                <td>$row[product_size]</td>
                                 <td>$row[product_quantity]</td>
                                 <td>$row[total_price] Tk</td>
                                 <td>$row[order_date]</td>

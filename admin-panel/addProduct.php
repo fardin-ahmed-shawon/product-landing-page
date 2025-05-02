@@ -43,21 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_title = $_POST['product_title'];
     $product_regular_price = $_POST['product_regular_price'];
     $product_price = $_POST['product_price'];
-    $product_main_ctg_id = $_POST['product_main_ctg'];
-    $product_sub_ctg_id = $_POST['product_sub_ctg'];
     $available_stock = $_POST['available_stock'];
-    $size_option = "Default";
     $product_keyword = $_POST['product_keyword'];
-    $product_description = $_POST['product_description'];
     $product_code = $_POST['product_code'];
-    $product_type = $_POST['product_type'];
 
     // Array to store image details
     $images = [
-        ['name' => $_FILES['product_img1']['name'], 'tmp_name' => $_FILES['product_img1']['tmp_name']],
-        ['name' => $_FILES['product_img2']['name'], 'tmp_name' => $_FILES['product_img2']['tmp_name']],
-        ['name' => $_FILES['product_img3']['name'], 'tmp_name' => $_FILES['product_img3']['tmp_name']],
-        ['name' => $_FILES['product_img4']['name'], 'tmp_name' => $_FILES['product_img4']['tmp_name']]
+        ['name' => $_FILES['product_img1']['name'], 'tmp_name' => $_FILES['product_img1']['tmp_name']]
     ];
 
     $uploadSuccess = true;
@@ -88,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($uploadSuccess) {
         // Prepare the SQL query
-        $query = "INSERT INTO product_info (product_title, product_regular_price, product_price, main_ctg_id, sub_ctg_id, available_stock, size_option, product_keyword, product_code, product_description, product_img1, product_img2, product_img3, product_img4, product_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO product_info (product_title, product_regular_price, product_price, available_stock, product_keyword, product_code, product_img1) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("sddssisssssssss", $product_title, $product_regular_price, $product_price, $product_main_ctg_id, $product_sub_ctg_id, $available_stock, $size_option, $product_keyword, $product_code, $product_description, $compressedFiles[0], $compressedFiles[1], $compressedFiles[2], $compressedFiles[3], $product_type);
+        $stmt->bind_param("sddisss", $product_title, $product_regular_price, $product_price, $available_stock, $product_keyword, $product_code, $compressedFiles[0]);
 
         // Execute the query
         if ($stmt->execute()) {
@@ -194,38 +186,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           <span class="details">Sale Price *</span>
                           <input name="product_price" type="text" placeholder="Enter product sale price" required>
                         </div>
-                        <!-- Main Category -->
-                        <div class="input-box">
-                          <span class="details">Choose Main Category *</span>
-                          <select id="main_ctg_name" name="product_main_ctg" required>
-                            <option value="">Select Main Category</option>
-                            <?php
-                              // Fetch main categories from the database
-                              $result = mysqli_query($conn, "SELECT main_ctg_id, main_ctg_name FROM main_category");
-                              while ($row = mysqli_fetch_assoc($result)) {
-                                $category_name = htmlspecialchars($row['main_ctg_name'], ENT_QUOTES, 'UTF-8');
-                                $category_id = $row['main_ctg_id'];
-                                  echo "<option value='$category_id'>$category_name</option>";
-                              }
-                            ?>
-                          </select>
-                        </div>
-                        <!-- Sub Category -->
-                        <div class="input-box">
-                          <span class="details">Choose Sub Category</span>
-                          <select id="main_sub_name" name="product_sub_ctg">
-                            <option value="">Select Sub Category</option>
-                            <?php
-                              // Fetch main categories from the database
-                              $result = mysqli_query($conn, "SELECT sub_ctg_id, sub_ctg_name FROM sub_category");
-                              while ($row = mysqli_fetch_assoc($result)) {
-                                $category_name = htmlspecialchars($row['sub_ctg_name'], ENT_QUOTES, 'UTF-8');
-                                $category_id = $row['sub_ctg_id'];
-                                  echo "<option value='$category_id'>$category_name</option>";
-                              }
-                            ?>
-                          </select>
-                        </div>
                         <!-- Total Stock -->
                         <div class="input-box">
                           <span class="details">Total Stock Amount *</span>
@@ -241,17 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           <span class="details">Product Code</span>
                           <input name="product_code" type="text" placeholder="Enter your product code">
                         </div>
-                        <!-- product type -->
-                        <div class="input-box">
-                          <span class="details">Choose Product Type</span>
-                          <select id="product_type" name="product_type">
-                            <option value="">Select Product Type</option>
-                            <option value='new_arrival'>New Arrival</option>
-                            <option value='top_selling'>Top Selling</option>
-                            <option value='trending'>Trending</option>
-                            <option value='top_rated'>Top Rated</option>
-                          </select>
-                        </div>
+
                         <!-- Description -->
 
                         <!--  Script For Text Editor -->
@@ -259,11 +209,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
                         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-                        <div class="form-group m-auto"> 
+                        <!-- <div class="form-group m-auto"> 
                           <span class="details">Product Description *</span>
                           <textarea id="summernote" rows="4" name="product_description" cols="58" class="mytextarea"> </textarea>
                         </div>
-                        <br><br>
+                        <br><br> -->
 
                           <script>
                             $('#summernote').summernote({
@@ -279,24 +229,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           <span class="details">Attach Primary Image *</span>
                           <h4>(1000 X 1000)</h4>
                           <input type="file" name="product_img1" id="file" class="inputfile" required/><br>
-                        </div>
-                        <!-- image 2 -->
-                        <div>
-                          <span class="details">Attach Image 2</span>
-                          <h4>(1000 X 1000)</h4>
-                          <input type="file" name="product_img2" id="file" class="inputfile"/><br>
-                        </div>
-                        <!-- image 3 -->
-                        <div>
-                          <span class="details">Attach Image 3</span>
-                          <h4>(1000 X 1000)</h4>
-                          <input type="file" name="product_img3" id="file" class="inputfile"/><br>
-                        </div>
-                        <!-- image 4 -->
-                        <div>
-                          <span class="details">Attach Image 4</span>
-                          <h4>(1000 X 1000)</h4>
-                          <input type="file" name="product_img4" id="file" class="inputfile"/><br>
                         </div>
                       </div>
                       <!-- Submit button -->

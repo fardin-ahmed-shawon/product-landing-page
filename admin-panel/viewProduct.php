@@ -58,10 +58,7 @@ if (!isset($_SESSION['admin'])) {
                 <?php
                     include('../dbConnection.php');
 
-                    $sql = "SELECT p.*, mc.main_ctg_name, sc.sub_ctg_name 
-                            FROM product_info p
-                            LEFT JOIN main_category mc ON p.main_ctg_id = mc.main_ctg_id
-                            LEFT JOIN sub_category sc ON p.sub_ctg_id = sc.sub_ctg_id";
+                    $sql = "SELECT * FROM product_info";
 
                     $result = mysqli_query($conn, $sql);
                     
@@ -74,13 +71,8 @@ if (!isset($_SESSION['admin'])) {
                                   <h4>ID: {$item['product_id']}</h4>
                                   <h4>Product Code: {$item['product_code']}</h4>
                                   <p>Keyword: {$item['product_keyword']}</p>
-                                  <p>Main Category: {$item['main_ctg_name']}</p>
-                                  <p>Sub Category: {$item['sub_ctg_name']}</p>
                                   <p>Available Quantity: {$item['available_stock']}</p>
 
-                                  <!--
-                                  <p>Size: {$item['size_option']}</p>
-                                  -->
                                   <h6>Regular Price: BDT {$item['product_regular_price']}</h6>
                                   <h6>Sale Price: BDT {$item['product_price']}</h6>
 

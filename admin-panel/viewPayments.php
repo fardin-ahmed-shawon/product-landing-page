@@ -130,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['mark_cancel'])) {
                                 WHERE order_visibility = 'Show'
                                 GROUP BY invoice_no
                                 ORDER BY serial_no DESC";
+
                                 
                         $result = $conn->query($sql);
 

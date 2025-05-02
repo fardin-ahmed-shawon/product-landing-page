@@ -69,9 +69,9 @@ if (!$order) {
 <div id="printArea" class="container">
 	<div class="row text-center">
 		<br><br>
-        <a href="index.php">
+        <!-- <a href="index.php">
 			<h2><?php include '../logo.php'; ?></h2>
-		</a>
+		</a> -->
     </div><br><hr><br>
     <div class="row">
         <div class="col-xs-12">
@@ -83,10 +83,11 @@ if (!$order) {
     			<div class="col-xs-6">
     				<address>
     				<strong>FROM:</strong><br>
-    					Lioobd<br>
-    					01911989240<br>
-    					lioobangladesh@gmail.com<br>
-    					3rd Floor, Lakecity Concord, Khilkhet, Dhaka -1229.
+    					Eassy Tech Solutions<br>
+    					01580741616<br>
+    					easytechsolutionx@gmail.com<br>
+    					67/B, ADDL Tower, 1st Floor
+						Dhanmondi 15/A, Dhaka
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
