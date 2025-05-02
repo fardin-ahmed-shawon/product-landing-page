@@ -56,7 +56,7 @@ if (!isset($_SESSION['admin'])) {
               <div class="container grid-container products">
                 <!-- All Product Card Will Add Here Dynamically -->
                 <?php
-                    include 'database/dbConnection.php';
+                    include('../dbConnection.php');
 
                     $sql = "SELECT p.*, mc.main_ctg_name, sc.sub_ctg_name 
                             FROM product_info p

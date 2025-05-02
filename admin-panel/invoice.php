@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 // Database connection
-include 'database/dbConnection.php';
+include('../dbConnection.php');
 
 // Fetch order data
 $invoice_no = $_GET['inv']; // Assuming order_no is passed as a query parameter

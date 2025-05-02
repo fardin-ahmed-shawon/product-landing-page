@@ -61,7 +61,7 @@ session_start();
 
 <?php
 
-include('database/dbConnection.php'); // Include database connection file
+include('../dbConnection.php'); // Include database connection file
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];

@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 // database connection
-include('database/dbConnection.php');
+include('../dbConnection.php');
 
 // admin password change
 $sql = "UPDATE admin_info 

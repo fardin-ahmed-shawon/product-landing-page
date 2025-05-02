@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 // Database connection
-include('database/dbConnection.php');
+include('../dbConnection.php');
 
 // Check connection
 if ($conn->connect_error) {

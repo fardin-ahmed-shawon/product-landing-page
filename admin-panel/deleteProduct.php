@@ -1,5 +1,5 @@
 <?php
-include 'database/dbConnection.php';
+include('../dbConnection.php');
 
 if (isset($_GET['id'])) {
     $productId = $_GET['id'];

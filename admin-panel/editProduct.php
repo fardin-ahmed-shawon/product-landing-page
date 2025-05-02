@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 
-include('database/dbConnection.php'); // Include database connection file
+include('../dbConnection.php'); // Include database connection file
 
 // Retrieve product ID from query string
 if (isset($_GET['id'])) {

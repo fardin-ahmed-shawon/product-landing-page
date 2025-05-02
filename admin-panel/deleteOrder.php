@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 // database connection
-include('database/dbConnection.php');
+include('../dbConnection.php');
 $order_no = $_GET['o_n'];
 
 // Delete query

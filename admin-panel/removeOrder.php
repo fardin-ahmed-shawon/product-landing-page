@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 // Database connection
-include('database/dbConnection.php');
+include('../dbConnection.php');
 
 // Get the order number from the query string
 $order_no = $_GET['o_n'];

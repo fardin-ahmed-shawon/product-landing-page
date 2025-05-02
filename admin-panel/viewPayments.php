@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 // database connection
-include('database/dbConnection.php');
+include('../dbConnection.php');
 
 // Update payment status to "Paid" if the Mark As Paid button is pressed
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_paid"])) {

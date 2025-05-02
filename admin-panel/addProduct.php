@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 
-include('database/dbConnection.php'); // Include database connection file
+include('../dbConnection.php'); // Include database connection file
 
 // Image Compression Function
 function compressImage($source, $destination, $quality = 75) {
