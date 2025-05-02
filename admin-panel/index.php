@@ -96,7 +96,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                       <i class="mdi mdi-currency-usd mdi-24px float-end"></i>
                     </h4>
                     <h1 class="mb-5">
-                      NO
+                    <?php
+                      // Fetch total products from product_info table
+                      $sql = "SELECT total_price FROM order_info";
+                      $result = $conn->query($sql);
+                      $total_price = 0;
+                      while ($row = $result->fetch_assoc()) {
+                        // Calculate total price
+                        $total_price += $row['total_price'];
+                      }
+                      echo $total_price . " ৳";
+                      ?>
                     </h1>
                   </div>
                 </div>
@@ -108,7 +118,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                     <h4 class="font-weight-normal mb-3">Pending Orders <i class="mdi mdi-apps mdi-24px float-end"></i>
                     </h4>
                     <h1 class="mb-5">
-                      NO
+                    <?php
+                      // Fetch total active orders from order_info table
+                      $sql = "SELECT COUNT(order_no) AS total_orders FROM order_info WHERE order_visibility='Show' AND order_status='Pending'";
+                      $result = $conn->query($sql);
+                      $row = $result->fetch_assoc();
+                      echo $row['total_orders'];
+                      ?>
                     </h1>
                   </div>
                 </div>
@@ -122,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                     <h1 class="mb-5">
                       <?php
                       // Fetch total active orders from order_info table
-                      $sql = "SELECT COUNT(order_no) AS total_orders FROM order_info WHERE order_visibility='Show'";
+                      $sql = "SELECT COUNT(order_no) AS total_orders FROM order_info WHERE order_visibility='Show' AND order_status!='Pending'";
                       $result = $conn->query($sql);
                       $row = $result->fetch_assoc();
                       echo $row['total_orders'];
