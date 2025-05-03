@@ -57,12 +57,12 @@
               </div>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="viewPayments.php">
                 <span class="menu-title">View Payments</span>
                 <i class="mdi mdi-currency-usd menu-icon"></i>
               </a>
-            </li>
+            </li> -->
             
             <li class="nav-item">
               <a class="nav-link" href="makeInvoice.php">

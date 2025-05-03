@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
             </div>
             <br><hr><br>
             <div class="row">
-              <h1>Cash On Delivery</h1>
+              <!-- <h1>Cash On Delivery</h1> -->
               <!-- <form class="form-group" action="#">
                 <input type="search" name="search" id="search" placeholder="Search Invoice No" class="form-control">
               </form> -->
@@ -200,13 +200,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
                </table>
               </div>
             </div>
-            <br><hr><br>
-            <div class="row">
+
+            <!-- <br><hr><br> -->
+
+            <!-- <div class="row">
                 <h1>Mobile Banking</h1>
-                <!-- <form class="form-group" action="#">
-                  <input type="search" name="search" id="search" placeholder="Search Invoice No" class="form-control">
-                </form> -->
-                <!-- Table Area -->
                 <div style="overflow-y: auto;">
                   <table class="table table-under-bordered">
                     <tbody>
@@ -223,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
                         </tr>
 
                         <?php
-                          // Query to retrieve data from payment_info table
+                          
                           $sql = "SELECT invoice_no, 
                                   GROUP_CONCAT(CASE 
                                               WHEN order_status != 'Pending' AND order_visibility = 'Show' 
@@ -253,7 +251,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
                                       echo "<td class='order-status'>" . $row["order_status"] . "</td>";
                                       echo "<td>" . $row["payment_method"] . "</td>";
 
-                                      //echo '<td class="invoice-button"><button onclick="window.location.href = \'invoice.php?inv='.$row["invoice_no"].'\'" class="btn btn-dark">See Invoice</button></td>';
 
                                       echo '<td class="invoice-button">
                                       <a href="invoice.php?inv='.$row['invoice_no'].'" class="btn btn-dark">See Invoice</a>
@@ -292,7 +289,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
                     </tbody>
                  </table>
                 </div>
-            </div>
+            </div> -->
+
           </div>
           <!--------------------------->
           <!-- END INVOICE AREA -->

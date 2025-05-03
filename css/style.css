@@ -1,6 +1,11 @@
 /**********************************/
 /********** General CSS ***********/
 /**********************************/
+
+:root {
+    --theme: #98BC62;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     color: #757575;
@@ -12,7 +17,7 @@ body {
 /* #4F84C4 */
 
 a {
-    color: #98BC62;
+    color: var(--theme);
     transition: 0.5s;
 }
 
@@ -45,7 +50,7 @@ h6 {
 .back-to-top {
     position: fixed;
     display: none;
-    background: #98BC62;
+    background: var(--theme);
     color: #ffffff;
     width: 44px;
     height: 44px;
@@ -136,14 +141,14 @@ h6 {
     height: 2px;
     bottom: 2px;
     left: 1px;
-    background: #98BC62;
+    background: var(--theme);
     opacity: 0;
     transition: .3s;
 }
 
 .nav-menu li:hover > a,
 .nav-menu > .menu-active > a {
-    color: #98BC62;
+    color: var(--theme);
 }
 
 .nav-menu li:hover > a::after,
@@ -209,11 +214,11 @@ h6 {
 }
 
 #mobile-nav ul li a:hover {
-    color: #98BC62;
+    color: var(--theme);
 }
 
 #mobile-nav ul li.menu-active a {
-    color: #98BC62;
+    color: var(--theme);
 }
 
 #mobile-body-overly {
@@ -288,7 +293,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #header .header-content h2 span {
-    color: #98BC62;
+    color: var(--theme);
 }
 
 #header .header-content ul {
@@ -301,19 +306,19 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #header .header-content ul li i {
-    color: #98BC62;
+    color: var(--theme);
 }
 
 #header .header-content .btn {
     padding: 7px 20px;
-    color: #98BC62;
+    color: var(--theme);
     font-size: 22px;
-    border: 2px solid #98BC62;
+    border: 2px solid var(--theme);
 }
 
 #header .header-content .btn:hover {
     color: #ffffff;
-    background: #98BC62;
+    background: var(--theme);
 }
 
 #header .header-img {
@@ -359,7 +364,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .section-header h2 {
     position: relative;
-    color: #98BC62;
+    color: var(--theme);
     font-size: 60px;
     font-weight: 700;
     text-align: center;
@@ -408,7 +413,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #feature .product-icon i {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 50px;
     margin-top: 5px;
 }
@@ -420,7 +425,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #feature .product-feature h2 {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 5px;
@@ -492,13 +497,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #process .process-col i {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 90px;
     margin-bottom: 15px;
 }
 
 #process .process-col h2 {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -551,26 +556,26 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #products .product-content h2 {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 20px;
     font-weight: 600;
 }
 
 #products .product-content h3 {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 25px;
     font-weight: 700;
 }
 
 #products .product-content .btn {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 18px;
-    border: 2px solid #98BC62;
+    border: 2px solid var(--theme);
 }
 
 #products .product-content .btn:hover {
     color: #ffffff;
-    background: #98BC62;
+    background: var(--theme);
 }
 
 @media (max-width: 767.98px) {
@@ -624,7 +629,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #testimonials .testimonial-content h3 {
     font-size: 22px;
     font-weight: 700;
-    color: #98BC62;
+    color: var(--theme);
     margin-bottom: 5px;
 }
 
@@ -659,7 +664,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #testimonials .owl-dot.active {
-    background: #98BC62;
+    background: var(--theme);
 }
 
 
@@ -696,7 +701,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding: 15px 0;
     text-align: center;
     color: #ffffff;
-    background: #98BC62;
+    background: var(--theme);
 }
 
 #faqs .card-header a {
@@ -714,7 +719,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     content: "\f067";
     float: right;
     margin-right: 15px;
-    color: #98BC62;
+    color: var(--theme);
     font-size: 14px;
     font-weight: 900;
     transition: .3s;
@@ -725,7 +730,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     content: "\f068";
     float: right;
     margin-right: 15px;
-    color: #98BC62;
+    color: var(--theme);
     font-size: 14px;
     font-weight: 900;
     transition: .3s;
@@ -745,7 +750,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #faqs .contact-info h2 {
-    color: #98BC62;
+    color: var(--theme);
     font-size: 30px;
     font-weight: 700;
 }
@@ -765,20 +770,20 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #faqs .contact-info h3 i {
     width: 20px;
-    color: #98BC62;
+    color: var(--theme);
     margin-right: 5px;
 }
 
 #faqs .contact-info a {
     margin: 10px 0 15px 0;
     font-size: 18px;
-    color: #98BC62;
-    border: 2px solid #98BC62;
+    color: var(--theme);
+    border: 2px solid var(--theme);
 }
 
 #faqs .contact-info a:hover {
     color: #ffffff;
-    background: #98BC62;
+    background: var(--theme);
 }
 
 #faqs .social {
@@ -794,16 +799,16 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding: 3px 0;
     text-align: center;
     font-size: 20px;
-    border: 2px solid #98BC62;
+    border: 2px solid var(--theme);
     border-radius: 4px;
 }
 
 #faqs .social a i {
-    color: #98BC62;
+    color: var(--theme);
 }
 
 #faqs .social a:hover {
-    background: #98BC62;
+    background: var(--theme);
 }
 
 #faqs .social a:hover i {

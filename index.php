@@ -22,6 +22,12 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/checkout.css" rel="stylesheet">
 
+        <style>
+            .container {
+                max-width: 1600px;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -404,16 +410,18 @@
                                                 <div class="payment-method">
                                                     <div class="payment-method-title">
                                                         <h5>Choose Your Payment Method</h5><br>
-                                                        <p>We Accept Cash On Delivery & Mobile Banking.</p>
+                                                        <!-- <p>We Accept Cash On Delivery & Mobile Banking.</p> -->
+                                                        <p>We Accept Cash On Delivery Only</p>
                                                     </div>
                                                     <div class="payment-method-list">
-                                                        <input type="radio" id="bkash" name="payment" value="bkash" checked="">
+                                                        <!-- <input type="radio" id="bkash" name="payment" value="bkash" checked="">
                                                         <label for="bkash">bKash</label><br>
                                                         <input type="radio" id="rocket" name="payment" value="rocket">
                                                         <label for="rocket">Rocket</label><br>
                                                         <input type="radio" id="nagad" name="payment" value="nagad">
-                                                        <label for="nagad">Nagad</label><br>
-                                                        <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery">
+                                                        <label for="nagad">Nagad</label><br> -->
+
+                                                        <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery" checked>
                                                         <label for="cash-on-delivery">Cash on Delivery</label><br>
                                                     </div>
                                                 </div>
@@ -438,7 +446,7 @@
         <div id="testimonials">
             <div class="container">
                 <div class="section-header">
-                    <h2>100% Client Satisfaction</h2>
+                    <h2>100% Customer Satisfaction</h2>
                     <p>
                         Here are some of the reviews from our customers. We are happy to serve you.
                     </p>
@@ -512,7 +520,7 @@
             </div>
         </div>
         <!-- Testimonials End -->
-        
+
         
         <!-- FAQ Start -->
         <div id="faqs">
