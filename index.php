@@ -13,6 +13,9 @@
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400|Quicksand:500,600,700&display=swap" rel="stylesheet">
 
+        <!-- Remix Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -210,50 +213,50 @@
                 </div>
                 <div class="row align-items-center">
                     <div class="col-md-3">
-                        <div class="product-single">
+                        <div class="product-single" product-id="1" product-name="Sports Edition" product-img="img/product-1.png" product-price="1550" product-quantity="1">
                             <div class="product-img">
                                 <img src="img/product-1.png" alt="Product Image">
                             </div>
                             <div class="product-content">
                                 <h2>Sports Edition</h2>
-                                <h3>$149</h3>
-                                <a class="btn" href="#">Add to Cart</a>
+                                <h3>৳ 1550</h3>
+                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="product-single">
+                        <div class="product-single" product-id="2" product-name="Classic Edition" product-img="img/product-2.png" product-price="1990" product-quantity="1">
                             <div class="product-img">
                                 <img src="img/product-2.png" alt="Product Image">
                             </div>
                             <div class="product-content">
-                                <h2>Sports Edition</h2>
-                                <h3>$199</h3>
-                                <a class="btn" href="#">Add to Cart</a>
+                                <h2>Classic Edition</h2>
+                                <h3>৳ 1990</h3>
+                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="product-single">
+                        <div class="product-single" product-id="3" product-name="Standard Edition" product-img="img/product-3.png" product-price="2499" product-quantity="1">
                             <div class="product-img">
                                 <img src="img/product-3.png" alt="Product Image">
                             </div>
                             <div class="product-content">
-                                <h2>Sports Edition</h2>
-                                <h3>$249</h3>
-                                <a class="btn" href="#">Add to Cart</a>
+                                <h2>Standard Edition</h2>
+                                <h3>৳ 2499</h3>
+                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="product-single">
+                        <div class="product-single" product-id="4" product-name="Premium Edition" product-img="img/product-4.png" product-price="3999" product-quantity="1">
                             <div class="product-img">
                                 <img src="img/product-4.png" alt="Product Image">
                             </div>
                             <div class="product-content">
-                                <h2>Sports Edition</h2>
-                                <h3>$299</h3>
-                                <a class="btn" href="#">Add to Cart</a>
+                                <h2>Premium Edition</h2>
+                                <h3>৳ 3999</h3>
+                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -341,15 +344,12 @@
                                                     <div class="order-items" id="order-items">
                                                         <!-- Cart item will add dynamically -->
 
-                                                        <div class="order-item">
+                                                        <!-- <div class="order-item">
                                                             <div class="order-product-info">
                                                                 <div class="cart-box" id="2">
                                                                     <img style="width: 60px; height: 60px;" src="img/product-1.png" alt="cart-img">
                                                                     <div class="cart-details ml-3">
                                                                         <h5 class="cart-product-title">Mens Premium Shirt - Urban</h5>
-                                                                        <!--
-                                                                        <h2 class="cart-product-title product-size">Size: XL</h2>
-                                                                        -->
                                                                         <div class="cart-quantity">
                                                                             <button class="decrement" id="decrement">-</button>
                                                                             <span class="number">1</span>
@@ -361,17 +361,14 @@
                                                             <div class="order-product-price amount">৳ 2290</div>
                                                         </div>
 
-                                                        <hr>
+                                                        <hr> -->
 
-                                                        <div class="order-item">
+                                                        <!-- <div class="order-item">
                                                             <div class="order-product-info">
                                                                 <div class="cart-box" id="1">
                                                                     <img style="width: 60px; height: 60px;" src="img/product-2.png" alt="cart-img">
                                                                     <div class="cart-details ml-3">
                                                                         <h5 class="cart-product-title">Mens Premium Shirt - Designer Edition</h5>
-                                                                        <!--
-                                                                        <h2 class="cart-product-title product-size">Size: XL</h2>
-                                                                        -->
                                                                         <div class="cart-quantity">
                                                                             <button class="decrement" id="decrement">-</button>
                                                                             <span class="number">1</span>
@@ -381,21 +378,22 @@
                                                                 </div>
                                                             </div>
                                                             <div class="order-product-price amount">৳ 1450</div>
-                                                        </div>
+                                                        </div> -->
+
                                                     </div>
-                                                    <hr>
+                                                    
                                                     <div class="subtotal">
                                                         <div class="subtotal-title">Subtotal</div>
-                                                        <div class="subtotal-price amount" id="subtotal-price">৳ 3740</div>
+                                                        <div class="subtotal-price amount" id="subtotal-price">৳ </div>
                                                     </div><br>
                                                     <div class="shipping">
                                                         <div class="shipping-title">Shipping</div>
-                                                        <div class="shipping-price amount" id="shipping-price">৳ 80</div>
+                                                        <div class="shipping-price amount" id="shipping-price">৳ </div>
                                                     </div>
                                                     <hr>
                                                     <div class="total-product-price">
                                                         <div class="total-product-price-title">Total</div>
-                                                        <div class="total-product-price-price amount" id="total-price">৳ 3820</div>
+                                                        <div class="total-product-price-price amount" id="total-price">৳ </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -653,5 +651,44 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/cart_calculation.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const shippingPriceElement = document.getElementById("shipping-price");
+                const totalPriceElement = document.getElementById("total-price");
+                const subtotalPriceElement = document.getElementById("subtotal-price");
+
+                // Function to update shipping price dynamically
+                function updateShippingPrice() {
+                    const selectedCity = document.querySelector('input[name="city"]:checked').value;
+                    let shippingPrice = 0;
+
+                    if (selectedCity === "Inside Dhaka") {
+                        shippingPrice = 80;
+                    } else if (selectedCity === "Outside Dhaka") {
+                        shippingPrice = 150;
+                    }
+
+                    // Update the shipping price in the DOM
+                    shippingPriceElement.textContent = `৳ ${shippingPrice}`;
+
+                    // Update the total price
+                    const subtotal = parseInt(subtotalPriceElement.textContent.replace("৳", "").trim());
+                    const totalPrice = subtotal + shippingPrice;
+                    totalPriceElement.textContent = `৳ ${totalPrice}`;
+                }
+
+                // Add event listeners to the radio buttons
+                const cityRadios = document.querySelectorAll('input[name="city"]');
+                cityRadios.forEach(radio => {
+                    radio.addEventListener("change", updateShippingPrice);
+                });
+
+                // Initialize the shipping price on page load
+                updateShippingPrice();
+            });
+        </script>
+
     </body>
 </html>
