@@ -6,45 +6,6 @@ if (!isset($_SESSION['admin'])) {
 }
 // database connection
 include('../dbConnection.php');
-
-// admin password change
-$sql = "UPDATE admin_info 
-SET admin_password = ? 
-WHERE admin_username = ? AND admin_password = ?;";
-
-if (isset($_POST['changePass'])) {
-    $oldPassword = $_POST['oldPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
-
-    if ($newPassword == $confirmPassword) {
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $newPassword, $_SESSION['admin'], $oldPassword);
-        if ($stmt->execute()) {
-            $password_updated_status = "Password Successfully Updated!";
-        } else {
-            $password_updated_status = "Error updating password. Please try again.";
-        }
-        $stmt->close();
-    }
-}
-
-// add admin
-// $sql = "INSERT INTO admin_info (admin_username, admin_password) VALUES (?, ?);";
-
-// if (isset($_POST['addAdmin'])) {
-//     $username = $_POST['username'];
-//     $adminPassword = $_POST['adminPassword'];
-//     $confirmAdminPassword = $_POST['confirmAdminPassword'];
-
-//     if ($adminPassword == $confirmAdminPassword) {
-//         $stmt = $conn->prepare($sql);
-//         $stmt->bind_param("ss", $username, $adminPassword);
-//         $stmt->execute();
-//         $stmt->close();
-//     }
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,18 +26,6 @@ if (isset($_POST['changePass'])) {
     <!-- Custom CSS-->
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-      #success-box {
-        max-width: 800px;
-        margin: auto;
-        text-align: center;
-        font-size: 18px;
-        padding: 20px;
-        color: #0A3622;
-        background: #D1E7DD;
-      }
-    </style>
-
   </head>
   <body>
     <div class="container-scroller">
@@ -94,69 +43,82 @@ if (isset($_POST['changePass'])) {
           <!-- START SETTINGS AREA -->
           <!--------------------------->
           <div class="content-wrapper">
-            <h1>Settings</h1>
-            <div class="row">
-                <!-- Left Form -->
-                <div class="col-md-6 mt-3">
-                    <div class="card p-3">
-                        <?php
-                            if (isset($password_updated_status)) {
-                            echo '<div class="card-header"><div id="success-box">'.$password_updated_status.'</div></div>';
-                            }
-                        ?>
-                        <div class="card-body">
-                            <h4 class="text-center">Change Admin Password</h4> 
-                            <br>
-                            <form action="" method="POST">
-                                <div class="form-group>
-                                <label for="oldPassword">Enter Old Password *</label>
-                                <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
-                                </div><br>
-                                <div class="form-group>
-                                <label for="newPassword">Enter New Password *</label>
-                                <input minlength="8" type="password" class="form-control" id="newPassword" name="newPassword" required>
-                                </div><br>
-                                <div class="form-group>
-                                <label for="confirmPassword">Enter Confirm Password *</label>
-                                <input minlength="8" type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                                </div><br>
-                                <button name="changePass" type="submit" class="btn btn-primary">Change Password</button>
-                            </form>
+            <section class="content-main">
+                
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <div class="content-header p-4">
+                            <h1 class="content-title">Settings</h1>
+                            <hr><br>
                         </div>
+
+                        <div class="row gx-5">
+                            <aside class="col-lg-3 border-end">
+                                <nav class="nav nav-pills flex-lg-column mb-4 alert alert-success">
+                                    <a class="nav-link text-dark" aria-current="page" href="">Change Content & Settings </a>
+                                </nav>
+                            </aside>
+                            <div class="col-lg-9">
+                                                    <section class="content-body p-xl-4">
+                                    <h2>Easy Tech Solutions</h2>
+                                    <p>easytechx.com</p>
+                                    
+                                    <hr class="my-5">
+                                    <div class="row" style="max-width: 920px">
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Admin Password</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your password by clicking here</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="change-password.php">Change</a>
+                                            </article>
+                                        </div>
+                                    </div>    
+                                    <br><hr><br>
+                                    <div class="row" style="max-width: 920px">
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Change Images</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can change all of your images by clicking here</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="change-images.php">Edit</a>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Change Text Content</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can update all of your page text content by clicking here</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="contact_us.php">Edit</a>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Product Features</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can update all of your product features by clicking here</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="faq.php">Edit</a>
+                                            </article>
+                                        </div>
+
+                                    </div>
+                                    <!-- row.// -->
+                                </section>
+                                <!-- content-body .// -->
+                            </div>
+                            <!-- col.// -->
+                        </div>
+                        <!-- row.// -->
                     </div>
+                    <!-- card body end// -->
                 </div>
-                <!-- Right Form -->
-                <!-- <div class="col-md-6 mt-3">
-                    <div class="card p-3">
-                        <div class="card-body">
-                            <h4 class="text-center">Add Admin</h4> 
-                            <br>
-                            <form action="" method="POST">
-                                <div class="form-group>
-                                <label for="username">Enter Username *</label>
-                                <input type="username" class="form-control" id="username" name="username" required>
-                                </div><br>
-                                <div class="form-group>
-                                <label for="password">Enter Your Password *</label>
-                                <input type="password" class="form-control" id="password" name="adminPassword" required>
-                                </div><br>
-                                <div class="form-group>
-                                <label for="confirmAdminPassword">Confirm Your Password *</label>
-                                <input type="password" class="form-control" id="confirmAdminPassword" name="confirmAdminPassword" required>
-                                </div><br>
-                                <button name="addAdmin" type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Header Information Control -->
-                <!-- <h1>Header Information Management</h1>
-                <h1>Footer Information Management</h1>
-                <h1>Set Delivery Charge</h1>
-                <h1>Add Payment Information (Mobile Banking, Bank)</h1> -->
-
-            </div>  
+                <!-- card end// -->
+            </section>
           </div>
           <!--------------------------->
           <!-- END SETTINGS AREA -->
