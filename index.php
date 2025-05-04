@@ -1,3 +1,6 @@
+<?php
+require 'dbConnection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,16 +32,30 @@
             .container {
                 max-width: 1600px;
             }
+            #success-box {
+                margin: auto;
+                text-align: center;
+                font-size: 20px;
+                font-weight: 500;
+                padding: 20px;
+                color: #0A3622;
+                background: #D1E7DD;
+            }
         </style>
 
     </head>
 
     <body>
+    <?php
+        if (isset($_GET['or_msg'])) {
+            echo '<div style="z-index: 9999; position: fixed; width: 100%;" id="success-box">Order Successfully Placed...</div>';
+        }
+    ?>
         <!-- Nav Start -->
         <div id="nav">
             <div class="container-fluid">
                 <div id="logo" class="pull-left">
-                    <a href="index.html"><img src="img/logo.png" alt="Logo" /></a>
+                    <a href="index.php"><img src="img/logo.png" alt="Logo" /></a>
                 </div>
 
                 <nav id="nav-menu-container">
@@ -50,6 +67,9 @@
                         <li><a href="#checkout">Checkout</a></li>
                         <li><a href="#testimonials">Reviews</a></li>
                         <li><a href="#faqs">FAQs</a></li>
+                        <li class="btn" style="background: #98BC62;"><a class="px-3 text-light " href="admin-panel/login.php" target="_blank">
+                            <b>Admin Panel</b>
+                        </a></li>
                     </ul>
                 </nav>
             </div>
@@ -212,54 +232,42 @@
                     </p>
                 </div>
                 <div class="row align-items-center">
-                    <div class="col-md-3">
-                        <div class="product-single" product-id="1" product-name="Sports Edition" product-img="img/product-1.png" product-price="1550" product-quantity="1">
-                            <div class="product-img">
-                                <img src="img/product-1.png" alt="Product Image">
-                            </div>
-                            <div class="product-content">
-                                <h2>Sports Edition</h2>
-                                <h3>৳ 1550</h3>
-                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="product-single" product-id="2" product-name="Classic Edition" product-img="img/product-2.png" product-price="1990" product-quantity="1">
-                            <div class="product-img">
-                                <img src="img/product-2.png" alt="Product Image">
-                            </div>
-                            <div class="product-content">
-                                <h2>Classic Edition</h2>
-                                <h3>৳ 1990</h3>
-                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="product-single" product-id="3" product-name="Standard Edition" product-img="img/product-3.png" product-price="2499" product-quantity="1">
-                            <div class="product-img">
-                                <img src="img/product-3.png" alt="Product Image">
-                            </div>
-                            <div class="product-content">
-                                <h2>Standard Edition</h2>
-                                <h3>৳ 2499</h3>
-                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="product-single" product-id="4" product-name="Premium Edition" product-img="img/product-4.png" product-price="3999" product-quantity="1">
-                            <div class="product-img">
-                                <img src="img/product-4.png" alt="Product Image">
-                            </div>
-                            <div class="product-content">
-                                <h2>Premium Edition</h2>
-                                <h3>৳ 3999</h3>
-                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Product List -->
+
+                    <?php 
+                        
+                        $sql = "SELECT * FROM product_info";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_num_rows($result);
+
+                        if ($row > 0) {
+                            while ($data = mysqli_fetch_assoc($result)) {
+                                $productId = $data['product_id'];
+                                $productName = $data['product_title'];
+                                $productPrice = $data['product_price'];
+                                $productQuantity = $data['available_stock'];
+                                $productImg = $data['product_img1'];
+
+                                echo '
+                                    <div class="col-md-3">
+                                        <div class="product-single" product-id="'.$productId.'" product-name="'.$productName.'" product-img="img/'.$productImg.'" product-price="'.$productPrice.'" product-quantity="1">
+                                            <div class="product-img">
+                                                <img src="img/'.$productImg.'" alt="Product Image">
+                                            </div>
+                                            <div class="product-content">
+                                                <h2>'.$productName.'</h2>
+                                                <h3>৳ '.$productPrice.'</h3>
+                                                <button class="btn" onclick="addToCart(this)">Add to Cart</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ';
+
+                            }
+                        }
+
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -278,40 +286,96 @@
                 <div class="row align-items-center">
                     <div class="col-12">
                         <div class="product-single">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6 text-left">
                                     <h4>Billing Address</h4>
                                     <br>
                                     <div class="content">
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve form data
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $city = $_POST['city'];
+
+    // Default Value
+    $payment_method = "Cash On Delivery";
+    $oder_status = "Pending";
+    $order_visibility = "Show";
+
+
+    // Generate a unique invoice number
+    function generateInvoiceNo() {
+        // Get the current timestamp in microseconds
+        $timestamp = microtime(true) * 10000; // More digits by multiplying
+        // Convert timestamp to a unique string
+        $uniqueString = 'INV-' . strtoupper(base_convert($timestamp, 10, 36));
+        return $uniqueString;
+    }
+    $invoice_no = generateInvoiceNo();
+
+
+
+    // Cart Info
+    $cartData = json_decode($_POST['carts'], true);
+    
+    foreach ($cartData as $product) {
+        $product_id = $product['id'];
+        $product_title = $product['name'];
+        $product_quantity = $product['quantity'];
+        $total_price = $product['price'] * $product_quantity;
+
+        // Insert order into the database
+        $sql = "INSERT INTO order_info (user_first_name, user_last_name, user_phone, user_email, user_address, city_address, invoice_no, product_id, product_title, product_quantity, total_price, payment_method, order_status, order_visibility) VALUES ('$firstName', '$lastName', '$phone', '$email', '$address', '$city', '$invoice_no', '$product_id', '$product_title', '$product_quantity', '$total_price', '$payment_method', '$oder_status', '$order_visibility')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "Order placed successfully!";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+    }
+
+}
+?>
+
+
+
                                         <!-- input form -->
-                                        <form action="" method="post" enctype="multipart/form-data">
+                                        
                                             <div class="user-details full-input-box">
                                                 <!-- Input for First Name -->
                                                 <div class="input-box form-group">
                                                     <span class="details">First Name<i class="text-danger">*</i></span>
                                                     <input class="form-control" name="firstName" type="text" placeholder="Enter your first name" required="">
                                                 </div>
-                                                <!-- Input for Lasat Name -->
+                                                <!-- Input for Last Name -->
                                                 <div class="input-box form-group">
                                                     <span class="details">Last Name<i class="text-danger">*</i></span>
                                                     <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" required="">
                                                 </div>
-                                                <!-- Input for phone number -->
+                                                <!-- Input for Phone Number -->
                                                 <div class="input-box form-group">
                                                     <span class="details">Phone Number<i class="text-danger">*</i></span>
                                                     <input class="form-control" minlength="11" name="phone" type="text" placeholder="Enter your number" required="">
                                                 </div>
-                                                <!-- Input for email number -->
+                                                <!-- Input for Email -->
                                                 <div class="input-box form-group">
                                                     <span class="details">Email</span>
                                                     <input class="form-control" name="email" type="email" placeholder="Enter your email">
                                                 </div>
-                                                <!-- Input for address -->
+                                                <!-- Input for Address -->
                                                 <div class="input-box form-group">
                                                     <span class="details">Address<i class="text-danger">*</i></span>
                                                     <input class="form-control" name="address" type="text" placeholder="Enter your address" required="">
                                                 </div><br>
-                                                <!-- Input for city -->
+                                                <!-- Input for City -->
                                                 <div class="radio-input-box form-group">
                                                     <span class="details">Choose Your Delivery Location<i class="text-danger">*</i></span>
                                                     <br>
@@ -327,7 +391,9 @@
                                                     </i>
                                                 </div>
                                             </div>
-                                        </form>
+                                            <!-- <button type="submit" class="btn btn-primary">Place Order</button> -->
+                                        
+
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-left">
@@ -343,42 +409,6 @@
                                                     </div><hr>
                                                     <div class="order-items" id="order-items">
                                                         <!-- Cart item will add dynamically -->
-
-                                                        <!-- <div class="order-item">
-                                                            <div class="order-product-info">
-                                                                <div class="cart-box" id="2">
-                                                                    <img style="width: 60px; height: 60px;" src="img/product-1.png" alt="cart-img">
-                                                                    <div class="cart-details ml-3">
-                                                                        <h5 class="cart-product-title">Mens Premium Shirt - Urban</h5>
-                                                                        <div class="cart-quantity">
-                                                                            <button class="decrement" id="decrement">-</button>
-                                                                            <span class="number">1</span>
-                                                                            <button class="increment" id="increment">+</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="order-product-price amount">৳ 2290</div>
-                                                        </div>
-
-                                                        <hr> -->
-
-                                                        <!-- <div class="order-item">
-                                                            <div class="order-product-info">
-                                                                <div class="cart-box" id="1">
-                                                                    <img style="width: 60px; height: 60px;" src="img/product-2.png" alt="cart-img">
-                                                                    <div class="cart-details ml-3">
-                                                                        <h5 class="cart-product-title">Mens Premium Shirt - Designer Edition</h5>
-                                                                        <div class="cart-quantity">
-                                                                            <button class="decrement" id="decrement">-</button>
-                                                                            <span class="number">1</span>
-                                                                            <button class="increment" id="increment">+</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="order-product-price amount">৳ 1450</div>
-                                                        </div> -->
 
                                                     </div>
                                                     
@@ -432,6 +462,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -688,6 +719,35 @@
                 // Initialize the shipping price on page load
                 updateShippingPrice();
             });
+
+
+            // Send product data from the localstora to the server
+            document.addEventListener('DOMContentLoaded', () => {
+                const form = document.querySelector('form');
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    const carts = JSON.parse(localStorage.getItem('carts')) || [];
+                    const formData = new FormData(form);
+
+                    // Add cart data to form data
+                    formData.append('carts', JSON.stringify(carts));
+
+                    // Send the form data to the server
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        document.body.innerHTML = data;
+                        localStorage.clear();
+                        window.location.href = "index.php?or_msg='successful'";
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+
         </script>
 
     </body>
