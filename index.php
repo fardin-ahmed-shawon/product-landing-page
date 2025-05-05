@@ -41,6 +41,13 @@ require 'dbConnection.php';
                 color: #0A3622;
                 background: #D1E7DD;
             }
+            #testimonials .testimonial-item img {
+                margin: 0 auto;
+                max-width: 100%;
+                max-height: 100%;
+                border: 1px solid rgba(0, 0, 0, .1);
+                border-radius: 5px;
+            }
         </style>
 
     </head>
@@ -52,33 +59,29 @@ require 'dbConnection.php';
         }
     ?>
         <!-- Nav Start -->
-        <div id="nav">
-            <div class="container-fluid">
-                <div id="logo" class="pull-left">
-                    <a href="index.php"><img src="img/logo.png" alt="Logo" /></a>
+        <!-- <div id="nav">
+            <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
+                <div id="logo" class="text-center">
+                    <a href="index.php"><img style="width: 300px; height: 300px;" src="img/logo.png" alt="Logo" /></a>
                 </div>
-
-                <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li class="menu-active"><a href="#header">Home</a></li>
-                        <li><a href="#feature">Features</a></li>
-                        <li><a href="#process">How Works</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#checkout">Checkout</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#faqs">FAQs</a></li>
-                        <li class="btn" style="background: #98BC62;"><a class="px-3 text-light " href="admin-panel/login.php" target="_blank">
-                            <b>Admin Panel</b>
-                        </a></li>
-                    </ul>
-                </nav>
+                <div>
+                    <a class="px-3 bg-success text-light " href="admin-panel/login.php" target="_blank">
+                        <b>Admin Panel</b>
+                    </a>
+                </div>
             </div>
-        </div>
+        </div> -->
         <!-- Nav End -->
         
         <!-- Header Start-->
-        <div id="header">
+        <div id="header" style="margin-top: 0;">
             <div class="container">
+                <div id="logo" class="pb-5" style="display: flex; align-items: center; justify-content: space-between;">
+                    <a href="index.php"><img style="width: 200px;" src="img/logo.png" alt="Logo" /></a>
+                    <a style="background: #98BC62; border-radius: 5px;" class="px-5 py-3 text-light" href="admin-panel/login.php" target="_blank">
+                        <b>Admin Panel</b>
+                    </a>
+                </div>
                 <div class="row align-items-center">
                     <div class="col-md-7">
                         <div class="header-content">
@@ -179,47 +182,6 @@ require 'dbConnection.php';
             </div>
         </div>
         <!-- Feature End-->
-
-        <!-- Process Start-->
-        <div id="process">
-            <div class="container">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>
-                        There are three simple steps to get started with your product. Follow the steps below to get started.
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="process-col">
-                            <i class="fa fa-plug"></i>
-                            <h2>Connect Device</h2>
-                            <p>
-                                Connect your device with your smartphone using Bluetooth. Make sure your device is charged.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="process-col">
-                            <i class="fa fa-sliders-h"></i>
-                            <h2>Configure it</h2>
-                            <p>
-                                Configure your device with the app. Make sure to allow all permissions for the app to work properly.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="process-col">
-                            <i class="fa fa-check"></i>
-                            <h2>Done. Enjoy!!!</h2>
-                            <p>
-                                Now you are ready to use your device. Enjoy the features and functionalities of your device.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Process End-->
         
         
         <!-- Products Start -->
@@ -272,6 +234,50 @@ require 'dbConnection.php';
             </div>
         </div>
         <!-- Products End -->
+
+
+        <!-- Testimonials Start -->
+        <div id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>100% Customer Satisfaction</h2>
+                    <p>
+                        Here are some of the reviews from our customers. We are happy to serve you.
+                    </p>
+                </div>
+                <div class="owl-carousel testimonials-carousel">
+                    <div class="testimonial-item">
+                        <!-- <div class="testimonial-img"> -->
+                            <img src="img/review.png" alt="">
+                        <!-- </div>
+                        <div class="testimonial-content">
+                            <h3>Mehedi H. Jony</h3>
+                            <h4>Business Development Lead</h4>
+                            <p>
+                                We are very happy with our product. They are using it for a long time and they are satisfied with the product.
+                            </p>
+                        </div> -->
+                    </div>
+
+                    <div class="testimonial-item">
+                        <img src="img/review.png" alt="">
+                    </div>
+
+                    <div class="testimonial-item">
+                        <img src="img/review.png" alt="">
+                    </div>
+                    
+                    <div class="testimonial-item">
+                        <img src="img/review.png" alt="">
+                    </div>
+                    
+                    <div class="testimonial-item">
+                        <img src="img/review.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonials End -->
 
 
         <!-- Checkout Start -->
@@ -469,174 +475,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
         <!-- Checkout End -->
-        
-        
-        <!-- Testimonials Start -->
-        <div id="testimonials">
-            <div class="container">
-                <div class="section-header">
-                    <h2>100% Customer Satisfaction</h2>
-                    <p>
-                        Here are some of the reviews from our customers. We are happy to serve you.
-                    </p>
-                </div>
-                <div class="owl-carousel testimonials-carousel">
-                    <div class="testimonial-item">
-                        <div class="testimonial-img">
-                            <img src="img/testimonial-1.jpg" alt="">
-                        </div>
-                        <div class="testimonial-content">
-                            <h3>Mehedi H. Jony</h3>
-                            <h4>Business Development Lead</h4>
-                            <p>
-                                We are very happy with our product. They are using it for a long time and they are satisfied with the product.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-item">
-                        <div class="testimonial-img">
-                            <img src="img/testimonial-2.jpg" alt="">
-                        </div>
-                        <div class="testimonial-content">
-                            <h3>Ovi Sheikh</h3>
-                            <h4>CEO</h4>
-                            <p>
-                                Very good product. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-item">
-                        <div class="testimonial-img">
-                            <img src="img/testimonial-3.jpg" alt="">
-                        </div>
-                        <div class="testimonial-content">
-                            <h3>Abdur Rahim</h3>
-                            <h4>Support Team Leader</h4>
-                            <p>
-                                Best product ever. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-item">
-                        <div class="testimonial-img">
-                            <img src="img/testimonial-4.jpg" alt="">
-                        </div>
-                        <div class="testimonial-content">
-                            <h3>Shimanto Khan</h3>
-                            <h4>Head of Communication</h4>
-                            <p>
-                                I am very happy with the product. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-item">
-                        <div class="testimonial-img">
-                            <img src="img/testimonial-5.jpg" alt="">
-                        </div>
-                        <div class="testimonial-content">
-                            <h3>Md. Sajedur</h3>
-                            <h4>Head of Digital Marketing</h4>
-                            <p>
-                                Graet product. I am using it for a long time and I am satisfied with the product. I will recommend it to my friends.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Testimonials End -->
-
+    
         
         <!-- FAQ Start -->
         <div id="faqs">
             <div class="container">
                 <div class="section-header">
-                    <h2>Quick FAQs</h2>
+                    <h2>Get in Touch</h2>
                     <p>
-                        Check out the most common questions we get from our customers. If you have any other questions, feel free to contact us.
+                    You can contact with us through the following methods. We are here to help you.
                     </p>
                 </div>
                 <div class="row align-items-center">
-                    <div class="col-md-7">
-                        <div id="accordion">
-                            <div class="card">
-                                <div class="card-header">
-                                    <span>1</span>
-                                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                        Your First Question?
-                                    </a>
-                                </div>
-                                <div id="collapseOne" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Your first question answer goes here.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <span>2</span>
-                                    <a class="card-link" data-toggle="collapse" href="#collapseTwo">
-                                        Your Second Question?
-                                    </a>
-                                </div>
-                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Your second question answer goes here.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <span>3</span>
-                                    <a class="card-link" data-toggle="collapse" href="#collapseThree">
-                                        Your Third Question?
-                                    </a>
-                                </div>
-                                <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Your third question answer goes here.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <span>4</span>
-                                    <a class="card-link" data-toggle="collapse" href="#collapseFour">
-                                        Your Fourth Question?
-                                    </a>
-                                </div>
-                                <div id="collapseFour" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Your fourth question answer goes here.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <span>5</span>
-                                    <a class="card-link" data-toggle="collapse" href="#collapseFive">
-                                        Your Fifth Question?
-                                    </a>
-                                </div>
-                                <div id="collapseFive" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Your fifth question answer goes here.
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-5">
+                    <div class="col-12 text-center">
                         <div class="contact-info">
-                            <h2>Get in Touch</h2>
-                            <p>
-                                You can contact with us through the following methods. We are here to help you.
-                            </p>
                             <h3><i class="fa fa-map-marker"></i>67/B, ADDL Tower, 1st Floor Dhanmondi 15/A, Dhaka</h3>
                             <h3><i class="fa fa-envelope"></i>easytechsolutionx@gmail.com</h3>
                             <h3><i class="fa fa-phone"></i>+880 1580-741616</h3>
