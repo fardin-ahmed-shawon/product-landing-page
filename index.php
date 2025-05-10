@@ -85,19 +85,52 @@ require 'dbConnection.php';
                 <div class="row align-items-center">
                     <div class="col-md-7">
                         <div class="header-content">
-                            <h2><span>WATCH</span> is the best <span>Landing Page</span> to showcause your product</h2>
+                        <?php
+                        $sql = "SELECT * FROM home_text";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_num_rows($result);
+                        if ($row > 0) {
+                            while ($data = mysqli_fetch_assoc($result)) {
+
+                                $home_title = $data['home_title'];
+                                $home_des = $data['home_description'];
+
+                            }
+                        }
+                        ?>
+
+                            <h2><span>
+                                <?php echo $home_title; ?>
+                            </span></h2>
+
+                            <!-- <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i>
+                                </span><?php echo $home_des; ?></li>
+                            </ul> -->
+
                             <ul class="fa-ul">
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Android and iOS Support</li>
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>GPS & Health Tracker</li>
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Read & reply to messages</li>
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Compatible with all devices</li>
                             </ul>
+
                             <a class="btn" href="#products">Order Now</a>
                         </div>
                     </div>
                     <div class="col-md-5">
+                        <?php
+                            $sql = "SELECT home_image FROM images";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_num_rows($result);
+                            if ($row > 0) {
+                                while ($data = mysqli_fetch_assoc($result)) {
+                                $home_img = $data['home_image'];
+                                }
+                            }
+                        ?>
                         <div class="header-img">
-                            <img src="img/watch-header.png" alt="Product Image">
+                            <img src="uploads/<?php echo $home_img; ?>" alt="Product Image">
                         </div>
                     </div>
                 </div>
@@ -116,67 +149,73 @@ require 'dbConnection.php';
                 </div>
                 <div class="row align-items-center">
                     <div class="col-md-4">
-                        <div class="product-feature">
-                            <div class="product-content">
-                                <h2>Innovative technology</h2>
-                                <p>It will be provide a innovation that made by us</p>
-                            </div>
-                            <div class="product-icon">
-                                <i class="fa fa-lightbulb"></i>
-                            </div>
-                        </div>
-                        <div class="product-feature">
-                            <div class="product-content">
-                                <h2>Fast and secure</h2>
-                                <p>The application is very fast & highly secured</p>
-                            </div>
-                            <div class="product-icon">
-                                <i class="fa fa-key"></i>
-                            </div>
-                        </div>
-                        <div class="product-feature">
-                            <div class="product-content">
-                                <h2>Easy to operate</h2>
-                                <p>It is very simple to use according to your needs</p>
-                            </div>
-                            <div class="product-icon">
-                                <i class="fa fa-thumbs-up"></i>
-                            </div>
-                        </div>
+                    <!-- fetch first 3 -->
+                    <?php
+                        $sql = "SELECT * FROM features LIMIT 3";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_num_rows($result);
+                        if ($row > 0) {
+                            while ($data = mysqli_fetch_assoc($result)) {
+                                $ft_title = $data['feature_title'];
+                                $ft_des = $data['feature_description'];
+
+                                echo '
+                                    <div class="product-feature">
+                                        <div class="product-content">
+                                            <h2>'.$ft_title.'</h2>
+                                            <p>'.$ft_des.'</p>
+                                        </div>
+                                        <div class="product-icon">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                ';
+                            }
+                        }
+                    ?>
                     </div>
+
+                    <?php
+                        $sql = "SELECT feature_image FROM images";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_num_rows($result);
+                        if ($row > 0) {
+                            while ($data = mysqli_fetch_assoc($result)) {
+                               $ftr_img = $data['feature_image'];
+                            }
+                        }
+                    ?>
                     <div class="col-md-4">
                         <div class="product-img">
-                            <img src="img/watch-features.png" alt="Product Image">
+                            <img src="uploads/<?php echo $ftr_img; ?>" alt="Product Image">
                         </div>
                     </div>
+
                     <div class="col-md-4">
-                        <div class="product-feature">
-                            <div class="product-icon">
-                                <i class="fa fa-map-marker-alt"></i>
-                            </div>
-                            <div class="product-content">
-                                <h2>GPS Tracking</h2>
-                                <p>It has a build in gps tracking system & it works smarty</p>
-                            </div>
-                        </div>
-                        <div class="product-feature">
-                            <div class="product-icon">
-                                <i class="fa fa-heartbeat"></i>
-                            </div>
-                            <div class="product-content">
-                                <h2>Heartbeat Analysis</h2>
-                                <p>It will analysis your current heartbeat & alert you from heart attack</p>
-                            </div>
-                        </div>
-                        <div class="product-feature">
-                            <div class="product-icon">
-                                <i class="fa fa-crown"></i>
-                            </div>
-                            <div class="product-content">
-                                <h2>Gorgeous color</h2>
-                                <p>You have some sevarel color option which you can preview the product page</p>
-                            </div>
-                        </div>
+                    <!-- fetch last 3 -->
+                    <?php
+                        $sql = "SELECT * FROM features ORDER BY feature_id DESC LIMIT 3";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_num_rows($result);
+                        if ($row > 0) {
+                            while ($data = mysqli_fetch_assoc($result)) {
+                                $ft_title = $data['feature_title'];
+                                $ft_des = $data['feature_description'];
+
+                                echo '
+                                    <div class="product-feature">
+                                        <div class="product-icon">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <div class="product-content">
+                                            <h2>'.$ft_title.'</h2>
+                                            <p>'.$ft_des.'</p>
+                                        </div>
+                                    </div>
+                                ';
+                            }
+                        }
+                    ?>
                     </div>
                 </div>
             </div>
@@ -246,34 +285,24 @@ require 'dbConnection.php';
                     </p>
                 </div>
                 <div class="owl-carousel testimonials-carousel">
-                    <div class="testimonial-item">
-                        <!-- <div class="testimonial-img"> -->
-                            <img src="img/review.png" alt="">
-                        <!-- </div>
-                        <div class="testimonial-content">
-                            <h3>Mehedi H. Jony</h3>
-                            <h4>Business Development Lead</h4>
-                            <p>
-                                We are very happy with our product. They are using it for a long time and they are satisfied with the product.
-                            </p>
-                        </div> -->
-                    </div>
 
-                    <div class="testimonial-item">
-                        <img src="img/review.png" alt="">
-                    </div>
+                <?php
+                    $sql = "SELECT * FROM reviews";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_num_rows($result);
+                    if ($row > 0) {
+                        while ($data = mysqli_fetch_assoc($result)) {
+                            $reviewImg = $data['review_image'];
 
-                    <div class="testimonial-item">
-                        <img src="img/review.png" alt="">
-                    </div>
-                    
-                    <div class="testimonial-item">
-                        <img src="img/review.png" alt="">
-                    </div>
-                    
-                    <div class="testimonial-item">
-                        <img src="img/review.png" alt="">
-                    </div>
+                            echo '
+                                <div class="testimonial-item">
+                                    <img src="uploads/'.$reviewImg.'" alt="">
+                                </div>
+                            ';
+                        }
+                    }
+                ?>
+
                 </div>
             </div>
         </div>

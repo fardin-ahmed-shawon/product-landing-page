@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accept_order'])) {
                     <h1 class="mb-5">
                     <?php
                       // Fetch total products from product_info table
-                      $sql = "SELECT total_price FROM order_info";
+                      $sql = "SELECT total_price FROM order_info WHERE order_status='Completed'";
                       $result = $conn->query($sql);
                       $total_price = 0;
                       while ($row = $result->fetch_assoc()) {

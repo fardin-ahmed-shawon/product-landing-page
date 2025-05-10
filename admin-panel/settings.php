@@ -93,7 +93,7 @@ include('../dbConnection.php');
                                                 <h6>Change Text Content</h6>
                                                 <small class="text-muted d-block" style="width: 70%">You can update all of your page text content by clicking here</small>
                                                 <br>
-                                                <a class="btn btn-dark" href="contact_us.php">Edit</a>
+                                                <a class="btn btn-dark" href="change-text.php">Edit</a>
                                             </article>
                                         </div>
 
@@ -102,7 +102,16 @@ include('../dbConnection.php');
                                                 <h6>Product Features</h6>
                                                 <small class="text-muted d-block" style="width: 70%">You can update all of your product features by clicking here</small>
                                                 <br>
-                                                <a class="btn btn-dark" href="faq.php">Edit</a>
+                                                <a class="btn btn-dark" href="features.php">Edit</a>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Product Reviews</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can add all of your reviews by clicking here</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="reviews.php">Edit</a>
                                             </article>
                                         </div>
 
