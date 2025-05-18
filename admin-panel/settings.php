@@ -75,6 +75,26 @@ include('../dbConnection.php');
                                                 <a class="btn btn-dark" href="change-password.php">Change</a>
                                             </article>
                                         </div>
+
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Website Info</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your all of your web info</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="edit-web-info.php">Change</a>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Logo & Favicon</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your logo and favicon</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="edit-logo-fav.php">Change</a>
+                                            </article>
+                                        </div>
+
                                     </div>    
                                     <br><hr><br>
                                     <div class="row" style="max-width: 920px">

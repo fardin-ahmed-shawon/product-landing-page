@@ -49,3 +49,17 @@ CREATE TABLE payment_info (
     payment_status VARCHAR(50) DEFAULT 'Unpaid',
     FOREIGN KEY (order_no) REFERENCES order_info(order_no) ON DELETE CASCADE
 );
+
+CREATE TABLE `website_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `fav` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `fb_link` varchar(255) NOT NULL,
+  `insta_link` varchar(255) NOT NULL,
+  `twitter_link` varchar(255) NOT NULL,
+  `yt_link` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

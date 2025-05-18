@@ -1,17 +1,36 @@
 <?php
 require 'dbConnection.php';
+
+// Fetch website information
+$websiteInfoQuery = "SELECT * FROM website_info WHERE id=1";
+$websiteInfoResult = mysqli_query($conn, $websiteInfoQuery);
+$websiteInfo = mysqli_fetch_assoc($websiteInfoResult);
+
+$websiteName = $websiteInfo['name'] ?? 'Easy Tech Solutions';
+$websiteAddress = $websiteInfo['address'] ?? 'N/A';
+$websitePhone = $websiteInfo['phone'] ?? 'N/A';
+$websiteEmail = $websiteInfo['email'] ?? 'N/A';
+$websiteFbLink = $websiteInfo['fb_link'] ?? '#';
+$websiteInstaLink = $websiteInfo['insta_link'] ?? '#';
+$websiteTwitterLink = $websiteInfo['twitter_link'] ?? '#';
+$websiteYtLink = $websiteInfo['yt_link'] ?? '#';
+
+$websiteLogo = $websiteInfo['logo'];
+$websiteFav = $websiteInfo['fav'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Easy Tech Solutions - Product Landing Page</title>
+        <title><?php echo $websiteName; ?></title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Product Landing Page" name="keywords">
         <meta content="Product Landing Page" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="admin-panel/<?php echo $websiteFav; ?>" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400|Quicksand:500,600,700&display=swap" rel="stylesheet">
@@ -58,26 +77,19 @@ require 'dbConnection.php';
             echo '<div style="z-index: 9999; position: fixed; width: 100%;" id="success-box">Order Successfully Placed...</div>';
         }
     ?>
-        <!-- Nav Start -->
-        <!-- <div id="nav">
-            <div class="container-fluid" style="display: flex; align-items: center; justify-content: center;">
-                <div id="logo" class="text-center">
-                    <a href="index.php"><img style="width: 300px; height: 300px;" src="img/logo.png" alt="Logo" /></a>
-                </div>
-                <div>
-                    <a class="px-3 bg-success text-light " href="admin-panel/login.php" target="_blank">
-                        <b>Admin Panel</b>
-                    </a>
-                </div>
-            </div>
-        </div> -->
-        <!-- Nav End -->
         
         <!-- Header Start-->
         <div id="header" style="margin-top: 0;">
             <div class="container">
                 <div id="logo" class="pb-5" style="display: flex; align-items: center; justify-content: space-between;">
-                    <a href="index.php"><img style="width: 200px;" src="img/logo.png" alt="Logo" /></a>
+                    <a href="index.php"><img style="width: 200px;" src="<?php
+                    if (isset($_GET['$websiteLogo'])) {
+                        echo 'admin-panel/'.$websiteLogo.'';
+                    } else {
+                        echo 'img/logo.png';
+                    }
+                        
+                    ?>" alt="Logo" /></a>
                     <a style="background: #98BC62; border-radius: 5px;" class="px-5 py-3 text-light" href="admin-panel/login.php" target="_blank">
                         <b>Admin Panel</b>
                     </a>
@@ -103,17 +115,11 @@ require 'dbConnection.php';
                                 <?php echo $home_title; ?>
                             </span></h2>
 
-                            <!-- <ul class="fa-ul">
+                            <ul class="fa-ul">
                                 <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i>
                                 </span><?php echo $home_des; ?></li>
-                            </ul> -->
-
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Android and iOS Support</li>
-                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>GPS & Health Tracker</li>
-                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Read & reply to messages</li>
-                                <li><span class="fa-li"><i class="far fa-arrow-alt-circle-right"></i></span>Compatible with all devices</li>
                             </ul>
+
 
                             <a class="btn" href="#products">Order Now</a>
                         </div>
@@ -148,76 +154,86 @@ require 'dbConnection.php';
                     </p>
                 </div>
                 <div class="row align-items-center">
-                    <div class="col-md-4">
-                    <!-- fetch first 3 -->
-                    <?php
-                        $sql = "SELECT * FROM features LIMIT 3";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_num_rows($result);
-                        if ($row > 0) {
-                            while ($data = mysqli_fetch_assoc($result)) {
-                                $ft_title = $data['feature_title'];
-                                $ft_des = $data['feature_description'];
 
-                                echo '
-                                    <div class="product-feature">
-                                        <div class="product-content">
-                                            <h2>'.$ft_title.'</h2>
-                                            <p>'.$ft_des.'</p>
-                                        </div>
-                                        <div class="product-icon">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                    </div>
-                                ';
-                            }
-                        }
-                    ?>
-                    </div>
+    <?php
+        // Fetch total number of features
+        $sql = "SELECT COUNT(*) as total FROM features";
+        $result = mysqli_query($conn, $sql);
+        $data = mysqli_fetch_assoc($result);
+        $totalFeatures = $data['total'];
 
-                    <?php
-                        $sql = "SELECT feature_image FROM images";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_num_rows($result);
-                        if ($row > 0) {
-                            while ($data = mysqli_fetch_assoc($result)) {
-                               $ftr_img = $data['feature_image'];
-                            }
-                        }
-                    ?>
-                    <div class="col-md-4">
-                        <div class="product-img">
-                            <img src="uploads/<?php echo $ftr_img; ?>" alt="Product Image">
+        // Calculate the midpoint
+        $midpoint = ceil($totalFeatures / 2); // Round up for odd numbers
+    ?>
+
+    <div class="col-md-4">
+        <!-- Fetch first half -->
+        <?php
+            $sql = "SELECT * FROM features LIMIT $midpoint";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($data = mysqli_fetch_assoc($result)) {
+                    $ft_title = $data['feature_title'];
+                    $ft_des = $data['feature_description'];
+
+                    echo '
+                        <div class="product-feature">
+                            <div class="product-content">
+                                <h2>'.$ft_title.'</h2>
+                                <p>'.$ft_des.'</p>
+                            </div>
+                            <div class="product-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
                         </div>
-                    </div>
+                    ';
+                }
+            }
+        ?>
+    </div>
 
-                    <div class="col-md-4">
-                    <!-- fetch last 3 -->
-                    <?php
-                        $sql = "SELECT * FROM features ORDER BY feature_id DESC LIMIT 3";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_num_rows($result);
-                        if ($row > 0) {
-                            while ($data = mysqli_fetch_assoc($result)) {
-                                $ft_title = $data['feature_title'];
-                                $ft_des = $data['feature_description'];
+    <?php
+        // Fetch feature image
+        $sql = "SELECT feature_image FROM images";
+        $result = mysqli_query($conn, $sql);
+        $ftr_img = '';
+        if (mysqli_num_rows($result) > 0) {
+            $data = mysqli_fetch_assoc($result);
+            $ftr_img = $data['feature_image'];
+        }
+    ?>
+    <div class="col-md-4">
+        <div class="product-img">
+            <img src="uploads/<?php echo $ftr_img; ?>" alt="Product Image">
+        </div>
+    </div>
 
-                                echo '
-                                    <div class="product-feature">
-                                        <div class="product-icon">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                        <div class="product-content">
-                                            <h2>'.$ft_title.'</h2>
-                                            <p>'.$ft_des.'</p>
-                                        </div>
-                                    </div>
-                                ';
-                            }
-                        }
-                    ?>
-                    </div>
-                </div>
+    <div class="col-md-4">
+        <!-- Fetch second half -->
+        <?php
+            $sql = "SELECT * FROM features LIMIT $midpoint, $totalFeatures";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($data = mysqli_fetch_assoc($result)) {
+                    $ft_title = $data['feature_title'];
+                    $ft_des = $data['feature_description'];
+
+                    echo '
+                        <div class="product-feature">
+                            <div class="product-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="product-content">
+                                <h2>'.$ft_title.'</h2>
+                                <p>'.$ft_des.'</p>
+                            </div>
+                        </div>
+                    ';
+                }
+            }
+        ?>
+    </div>
+</div>
             </div>
         </div>
         <!-- Feature End-->
@@ -505,7 +521,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <!-- Checkout End -->
     
-        
+
         <!-- FAQ Start -->
         <div id="faqs">
             <div class="container">
@@ -518,16 +534,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
                         <div class="contact-info">
-                            <h3><i class="fa fa-map-marker"></i>67/B, ADDL Tower, 1st Floor Dhanmondi 15/A, Dhaka</h3>
-                            <h3><i class="fa fa-envelope"></i>easytechsolutionx@gmail.com</h3>
-                            <h3><i class="fa fa-phone"></i>+880 1580-741616</h3>
+                            <h3><i class="fa fa-map-marker"></i><?php echo $websiteAddress; ?></h3>
+                            <h3><i class="fa fa-envelope"></i><?php echo $websiteEmail; ?></h3>
+                            <h3><i class="fa fa-phone"></i><?php echo $websitePhone; ?></h3>
                             <a class="btn" href="#">Contact Us</a>
                             <div class="social">
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-facebook"></i></a>
-                                <a href=""><i class="fab fa-linkedin"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
+                                <a href="<?php echo $websiteTwitterLink; ?>"><i class="fab fa-twitter"></i></a>
+                                <a href="<?php echo $websiteFbLink; ?>"><i class="fab fa-facebook"></i></a>
+                                <a href="<?php echo $websiteInstaLink; ?>"><i class="fab fa-instagram"></i></a>
+                                <a href="<?php echo $websiteYtLink; ?>"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>
