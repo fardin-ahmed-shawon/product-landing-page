@@ -16,59 +16,20 @@ $websiteInstaLink = $websiteInfo['insta_link'] ?? '#';
 $websiteTwitterLink = $websiteInfo['twitter_link'] ?? '#';
 $websiteYtLink = $websiteInfo['yt_link'] ?? '#';
 
-$websiteLogo = $websiteInfo['logo'] ?? 'img/233esx.png';
-$websiteFav = $websiteInfo['fav'] ?? 'img/233esx.png';
+$websiteLogo = $websiteInfo['logo'] ?? '#';
+$websiteFav = $websiteInfo['fav'] ?? '#';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve form data
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-    $payment_method = $_POST['payment'];
-    $accNum = $_POST['accNum'] ?? null;
-    $transactionID = $_POST['transactionID'] ?? null;
 
-    // Default Values
-    $order_status = "Pending";
-    $order_visibility = "Show";
+if ($websiteLogo == '#') {
+    $websiteLogo = 'img/233esx.png';
+} else {
+    $websiteLogo = $websiteInfo['logo'];
+}
 
-    // Generate a unique invoice number
-    function generateInvoiceNo() {
-        $timestamp = microtime(true) * 10000; // More digits by multiplying
-        return 'INV-' . strtoupper(base_convert($timestamp, 10, 36));
-    }
-    $invoice_no = generateInvoiceNo();
-
-    // Cart Info
-    $cartData = json_decode($_POST['carts'], true);
-
-    foreach ($cartData as $product) {
-        $product_id = $product['id'];
-        $product_title = $product['name'];
-        $product_quantity = $product['quantity'];
-        $total_price = $product['price'] * $product_quantity;
-
-        // Insert order into the database
-        $sql = "INSERT INTO order_info (user_first_name, user_last_name, user_phone, user_email, user_address, city_address, invoice_no, product_id, product_title, product_quantity, total_price, payment_method, order_status, order_visibility) 
-                VALUES ('$firstName', '$lastName', '$phone', '$email', '$address', '$city', '$invoice_no', '$product_id', '$product_title', '$product_quantity', '$total_price', '$payment_method', '$order_status', '$order_visibility')";
-
-        if (mysqli_query($conn, $sql)) {
-            if ($payment_method != "Cash On Delivery") {
-                // Get the last inserted order number
-                $order_no = mysqli_insert_id($conn);
-
-                // Insert payment information
-                $sql_payment = "INSERT INTO payment_info (invoice_no, order_no, order_status, payment_method, acc_number, transaction_id, payment_status) 
-                                VALUES ('$invoice_no', '$order_no', '$order_status', '$payment_method', '$accNum', '$transactionID', 'Unpaid')";
-                mysqli_query($conn, $sql_payment);
-            }
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-    }
+if ($websiteFav == '#') {
+    $websiteFav = 'img/233esx.png';
+} else {
+    $websiteFav = $websiteInfo['fav'];
 }
 
 ?>

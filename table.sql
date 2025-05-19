@@ -56,11 +56,15 @@ CREATE TABLE `website_info` (
   `logo` varchar(255) NOT NULL,
   `fav` varchar(255) NOT NULL,
   `address` text NOT NULL,
+  `inside_location` text NOT NULL,
+  `inside_delivery_charge` INT NOT NULL,
+  `outside_delivery_charge` INT NOT NULL,
   `phone` varchar(15) NOT NULL,
   `acc_num` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `fb_link` varchar(255) NOT NULL,
   `insta_link` varchar(255) NOT NULL,
   `twitter_link` varchar(255) NOT NULL,
-  `yt_link` varchar(255) NOT NULL
+  `yt_link` varchar(255) NOT NULL,
+  `vdo_location` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
