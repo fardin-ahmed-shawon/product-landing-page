@@ -57,6 +57,7 @@ CREATE TABLE `website_info` (
   `fav` varchar(255) NOT NULL,
   `address` text NOT NULL,
   `phone` varchar(15) NOT NULL,
+  `acc_num` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `fb_link` varchar(255) NOT NULL,
   `insta_link` varchar(255) NOT NULL,

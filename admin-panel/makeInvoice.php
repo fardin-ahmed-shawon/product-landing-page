@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
             </div>
             <br><hr><br>
             <div class="row">
-              <!-- <h1>Cash On Delivery</h1> -->
+              <h1>Cash On Delivery</h1>
               <!-- <form class="form-group" action="#">
                 <input type="search" name="search" id="search" placeholder="Search Invoice No" class="form-control">
               </form> -->
@@ -201,9 +201,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
               </div>
             </div>
 
-            <!-- <br><hr><br> -->
+            <br><hr><br>
 
-            <!-- <div class="row">
+            <div class="row">
                 <h1>Mobile Banking</h1>
                 <div style="overflow-y: auto;">
                   <table class="table table-under-bordered">
@@ -289,7 +289,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mark_canceled_both"]))
                     </tbody>
                  </table>
                 </div>
-            </div> -->
+            </div>
 
           </div>
           <!--------------------------->

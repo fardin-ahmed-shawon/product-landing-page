@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'] ?? null;
     $address = $_POST['address'] ?? null;
     $phone = $_POST['phone'] ?? null;
+    $acc_num = $_POST['acc_num'] ?? null;
     $email = $_POST['email'] ?? null;
     $fb_link = $_POST['fb_link'] ?? null;
     $insta_link = $_POST['insta_link'] ?? null;
@@ -27,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Update existing row
         $updateQuery = "UPDATE website_info SET 
             name='$name', address='$address', 
-            phone='$phone', email='$email', fb_link='$fb_link', 
+            phone='$phone', acc_num='$acc_num', email='$email', fb_link='$fb_link', 
             insta_link='$insta_link', twitter_link='$twitter_link', yt_link='$yt_link' 
             WHERE id=1";
         $conn->query($updateQuery);
     } else {
         // Insert new row
-        $insertQuery = "INSERT INTO website_info (id, name, address, phone, email, fb_link, insta_link, twitter_link, yt_link) 
-            VALUES (1, '$name', '$address', '$phone', '$email', '$fb_link', '$insta_link', '$twitter_link', '$yt_link')";
+        $insertQuery = "INSERT INTO website_info (id, name, address, phone, acc_num, email, fb_link, insta_link, twitter_link, yt_link) 
+            VALUES (1, '$name', '$address', '$phone', '$acc_num', '$email', '$fb_link', '$insta_link', '$twitter_link', '$yt_link')";
         $conn->query($insertQuery);
     }
 }
@@ -78,53 +79,64 @@ $info = $infoResult->fetch_assoc();
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-md-8">
-                        <h4>Update Website Information</h4>
-                        <form method="POST" action="">
-                            <div class="form-group">
-                                <label for="name">Website Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="<?= $info['name'] ?? '' ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <textarea class="form-control" id="address" name="address"><?= $info['address'] ?? '' ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="<?= $info['phone'] ?? '' ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="<?= $info['email'] ?? '' ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="fb_link">Facebook Link</label>
-                                <input type="text" class="form-control" id="fb_link" name="fb_link" value="<?= $info['fb_link'] ?? '' ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="insta_link">Instagram Link</label>
-                                <input type="text" class="form-control" id="insta_link" name="insta_link" value="<?= $info['insta_link'] ?? '' ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="twitter_link">Twitter Link</label>
-                                <input type="text" class="form-control" id="twitter_link" name="twitter_link" value="<?= $info['twitter_link'] ?? '' ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="yt_link">YouTube Link</label>
-                                <input type="text" class="form-control" id="yt_link" name="yt_link" value="<?= $info['yt_link'] ?? '' ?>">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </form>
+                        <div class="card card-body p-5">
+                            <h4>Update Website Information</h4>
+                            <br><br>
+                            <form method="POST" action="">
+                                <div class="form-group">
+                                    <label for="name">Website Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<?= $info['name'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <textarea class="form-control" id="address" name="address"><?= $info['address'] ?? '' ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" value="<?= $info['phone'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Account Number (Mobile Banking)</label>
+                                    <input type="text" class="form-control" id="acc_num" name="acc_num" value="<?= $info['acc_num'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="<?= $info['email'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fb_link">Facebook Link</label>
+                                    <input type="text" class="form-control" id="fb_link" name="fb_link" value="<?= $info['fb_link'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="insta_link">Instagram Link</label>
+                                    <input type="text" class="form-control" id="insta_link" name="insta_link" value="<?= $info['insta_link'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter_link">Twitter Link</label>
+                                    <input type="text" class="form-control" id="twitter_link" name="twitter_link" value="<?= $info['twitter_link'] ?? '' ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="yt_link">YouTube Link</label>
+                                    <input type="text" class="form-control" id="yt_link" name="yt_link" value="<?= $info['yt_link'] ?? '' ?>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <h4>Preview Information</h4>
-                        <p><strong>Website Name:</strong> <?= $info['name'] ?? 'N/A' ?></p>
-                        <p><strong>Address:</strong> <?= $info['address'] ?? 'N/A' ?></p>
-                        <p><strong>Phone:</strong> <?= $info['phone'] ?? 'N/A' ?></p>
-                        <p><strong>Email:</strong> <?= $info['email'] ?? 'N/A' ?></p>
-                        <p><strong>Facebook:</strong> <a href="<?= $info['fb_link'] ?? '#' ?>" target="_blank"><?= $info['fb_link'] ?? 'N/A' ?></a></p>
-                        <p><strong>Instagram:</strong> <a href="<?= $info['insta_link'] ?? '#' ?>" target="_blank"><?= $info['insta_link'] ?? 'N/A' ?></a></p>
-                        <p><strong>Twitter:</strong> <a href="<?= $info['twitter_link'] ?? '#' ?>" target="_blank"><?= $info['twitter_link'] ?? 'N/A' ?></a></p>
-                        <p><strong>YouTube:</strong> <a href="<?= $info['yt_link'] ?? '#' ?>" target="_blank"><?= $info['yt_link'] ?? 'N/A' ?></a></p>
+                        <div class="card card-body p-5">
+                            <h4>Preview Information</h4>
+                            <br><br>
+                            <p><strong>Website Name:</strong> <?= $info['name'] ?? 'N/A' ?></p>
+                            <p><strong>Address:</strong> <?= $info['address'] ?? 'N/A' ?></p>
+                            <p><strong>Phone:</strong> <?= $info['phone'] ?? 'N/A' ?></p>
+                            <p><strong>Account Number:</strong> <?= $info['acc_num'] ?? 'N/A' ?></p>
+                            <p><strong>Email:</strong> <?= $info['email'] ?? 'N/A' ?></p>
+                            <p><strong>Facebook:</strong> <a href="<?= $info['fb_link'] ?? '#' ?>" target="_blank"><?= $info['fb_link'] ?? 'N/A' ?></a></p>
+                            <p><strong>Instagram:</strong> <a href="<?= $info['insta_link'] ?? '#' ?>" target="_blank"><?= $info['insta_link'] ?? 'N/A' ?></a></p>
+                            <p><strong>Twitter:</strong> <a href="<?= $info['twitter_link'] ?? '#' ?>" target="_blank"><?= $info['twitter_link'] ?? 'N/A' ?></a></p>
+                            <p><strong>YouTube:</strong> <a href="<?= $info['yt_link'] ?? '#' ?>" target="_blank"><?= $info['yt_link'] ?? 'N/A' ?></a></p>
+                        </div>
                     </div>
                 </div>
             </div>

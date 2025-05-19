@@ -9,15 +9,67 @@ $websiteInfo = mysqli_fetch_assoc($websiteInfoResult);
 $websiteName = $websiteInfo['name'] ?? 'Easy Tech Solutions';
 $websiteAddress = $websiteInfo['address'] ?? 'N/A';
 $websitePhone = $websiteInfo['phone'] ?? 'N/A';
+$accNum = $websiteInfo['acc_num'] ?? 'N/A';
 $websiteEmail = $websiteInfo['email'] ?? 'N/A';
 $websiteFbLink = $websiteInfo['fb_link'] ?? '#';
 $websiteInstaLink = $websiteInfo['insta_link'] ?? '#';
 $websiteTwitterLink = $websiteInfo['twitter_link'] ?? '#';
 $websiteYtLink = $websiteInfo['yt_link'] ?? '#';
 
-$websiteLogo = $websiteInfo['logo'];
-$websiteFav = $websiteInfo['fav'];
+$websiteLogo = $websiteInfo['logo'] ?? 'img/233esx.png';
+$websiteFav = $websiteInfo['fav'] ?? 'img/233esx.png';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve form data
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $city = $_POST['city'];
+    $payment_method = $_POST['payment'];
+    $accNum = $_POST['accNum'] ?? null;
+    $transactionID = $_POST['transactionID'] ?? null;
+
+    // Default Values
+    $order_status = "Pending";
+    $order_visibility = "Show";
+
+    // Generate a unique invoice number
+    function generateInvoiceNo() {
+        $timestamp = microtime(true) * 10000; // More digits by multiplying
+        return 'INV-' . strtoupper(base_convert($timestamp, 10, 36));
+    }
+    $invoice_no = generateInvoiceNo();
+
+    // Cart Info
+    $cartData = json_decode($_POST['carts'], true);
+
+    foreach ($cartData as $product) {
+        $product_id = $product['id'];
+        $product_title = $product['name'];
+        $product_quantity = $product['quantity'];
+        $total_price = $product['price'] * $product_quantity;
+
+        // Insert order into the database
+        $sql = "INSERT INTO order_info (user_first_name, user_last_name, user_phone, user_email, user_address, city_address, invoice_no, product_id, product_title, product_quantity, total_price, payment_method, order_status, order_visibility) 
+                VALUES ('$firstName', '$lastName', '$phone', '$email', '$address', '$city', '$invoice_no', '$product_id', '$product_title', '$product_quantity', '$total_price', '$payment_method', '$order_status', '$order_visibility')";
+
+        if (mysqli_query($conn, $sql)) {
+            if ($payment_method != "Cash On Delivery") {
+                // Get the last inserted order number
+                $order_no = mysqli_insert_id($conn);
+
+                // Insert payment information
+                $sql_payment = "INSERT INTO payment_info (invoice_no, order_no, order_status, payment_method, acc_number, transaction_id, payment_status) 
+                                VALUES ('$invoice_no', '$order_no', '$order_status', '$payment_method', '$accNum', '$transactionID', 'Unpaid')";
+                mysqli_query($conn, $sql_payment);
+            }
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -82,14 +134,7 @@ $websiteFav = $websiteInfo['fav'];
         <div id="header" style="margin-top: 0;">
             <div class="container">
                 <div id="logo" class="pb-5" style="display: flex; align-items: center; justify-content: space-between;">
-                    <a href="index.php"><img style="width: 200px;" src="<?php
-                    if (isset($_GET['$websiteLogo'])) {
-                        echo 'admin-panel/'.$websiteLogo.'';
-                    } else {
-                        echo 'img/logo.png';
-                    }
-                        
-                    ?>" alt="Logo" /></a>
+                    <a href="index.php"><img style="width: 200px;" src="admin-panel/<?php echo $websiteLogo; ?>" alt="Logo" /></a>
                     <a style="background: #98BC62; border-radius: 5px;" class="px-5 py-3 text-light" href="admin-panel/login.php" target="_blank">
                         <b>Admin Panel</b>
                     </a>
@@ -327,198 +372,178 @@ $websiteFav = $websiteInfo['fav'];
 
         <!-- Checkout Start -->
         <div id="checkout">
-            <div class="container" id="products">
-                <div class="section-header">
-                    <h2>Checkout</h2>
-                    <p>
-                        Place your order now and get a discount. Hurry up! Limited time offer.
-                    </p>
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="product-single">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-md-6 text-left">
-                                    <h4>Billing Address</h4>
-                                    <br>
-                                    <div class="content">
-
-<?php
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve form data
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-
-    // Default Value
-    $payment_method = "Cash On Delivery";
-    $oder_status = "Pending";
-    $order_visibility = "Show";
-
-
-    // Generate a unique invoice number
-    function generateInvoiceNo() {
-        // Get the current timestamp in microseconds
-        $timestamp = microtime(true) * 10000; // More digits by multiplying
-        // Convert timestamp to a unique string
-        $uniqueString = 'INV-' . strtoupper(base_convert($timestamp, 10, 36));
-        return $uniqueString;
-    }
-    $invoice_no = generateInvoiceNo();
-
-
-
-    // Cart Info
-    $cartData = json_decode($_POST['carts'], true);
-    
-    foreach ($cartData as $product) {
-        $product_id = $product['id'];
-        $product_title = $product['name'];
-        $product_quantity = $product['quantity'];
-        $total_price = $product['price'] * $product_quantity;
-
-        // Insert order into the database
-        $sql = "INSERT INTO order_info (user_first_name, user_last_name, user_phone, user_email, user_address, city_address, invoice_no, product_id, product_title, product_quantity, total_price, payment_method, order_status, order_visibility) VALUES ('$firstName', '$lastName', '$phone', '$email', '$address', '$city', '$invoice_no', '$product_id', '$product_title', '$product_quantity', '$total_price', '$payment_method', '$oder_status', '$order_visibility')";
-
-        if (mysqli_query($conn, $sql)) {
-            echo "Order placed successfully!";
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-
-    }
-
-}
-?>
-
-
-
-                                        <!-- input form -->
-                                        
-                                            <div class="user-details full-input-box">
-                                                <!-- Input for First Name -->
-                                                <div class="input-box form-group">
-                                                    <span class="details">First Name<i class="text-danger">*</i></span>
-                                                    <input class="form-control" name="firstName" type="text" placeholder="Enter your first name" required="">
-                                                </div>
-                                                <!-- Input for Last Name -->
-                                                <div class="input-box form-group">
-                                                    <span class="details">Last Name<i class="text-danger">*</i></span>
-                                                    <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" required="">
-                                                </div>
-                                                <!-- Input for Phone Number -->
-                                                <div class="input-box form-group">
-                                                    <span class="details">Phone Number<i class="text-danger">*</i></span>
-                                                    <input class="form-control" minlength="11" name="phone" type="text" placeholder="Enter your number" required="">
-                                                </div>
-                                                <!-- Input for Email -->
-                                                <div class="input-box form-group">
-                                                    <span class="details">Email</span>
-                                                    <input class="form-control" name="email" type="email" placeholder="Enter your email">
-                                                </div>
-                                                <!-- Input for Address -->
-                                                <div class="input-box form-group">
-                                                    <span class="details">Address<i class="text-danger">*</i></span>
-                                                    <input class="form-control" name="address" type="text" placeholder="Enter your address" required="">
-                                                </div><br>
-                                                <!-- Input for City -->
-                                                <div class="radio-input-box form-group">
-                                                    <span class="details">Choose Your Delivery Location<i class="text-danger">*</i></span>
-                                                    <br>
-                                                    <input name="city" type="radio" id="dhaka" value="Inside Dhaka" checked="">
-                                                    <label for="dhaka">Inside Dhaka</label>
-                                                    <br>
-                                                    <input name="city" type="radio" id="outside" value="Outside Dhaka">
-                                                    <label for="outside">Outside Dhaka</label>
-                                                    <br><br>
-                                                    <i>
-                                                        <p class="text-muted">* Delivery Charge Inside Dhaka 80 ৳</p>
-                                                        <p class="text-muted">* Delivery Charge Outside Dhaka 150 ৳</p>
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <!-- <button type="submit" class="btn btn-primary">Place Order</button> -->
-                                        
-
+    <div class="container" id="products">
+        <div class="section-header">
+            <h2>Checkout</h2>
+            <p>
+                Place your order now and get a discount. Hurry up! Limited time offer.
+            </p>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="product-single">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <!-- Billing Address Section -->
+                            <div class="col-md-6 text-left">
+                                <h4>Billing Address</h4>
+                                <br>
+                                <div class="content">
+                                    <div class="user-details full-input-box">
+                                        <!-- Input for First Name -->
+                                        <div class="input-box form-group">
+                                            <span class="details">First Name<i class="text-danger">*</i></span>
+                                            <input class="form-control" name="firstName" type="text" placeholder="Enter your first name" required="">
+                                        </div>
+                                        <!-- Input for Last Name -->
+                                        <div class="input-box form-group">
+                                            <span class="details">Last Name<i class="text-danger">*</i></span>
+                                            <input class="form-control" name="lastName" type="text" placeholder="Enter your last name" required="">
+                                        </div>
+                                        <!-- Input for Phone Number -->
+                                        <div class="input-box form-group">
+                                            <span class="details">Phone Number<i class="text-danger">*</i></span>
+                                            <input class="form-control" minlength="11" name="phone" type="text" placeholder="Enter your number" required="">
+                                        </div>
+                                        <!-- Input for Email -->
+                                        <div class="input-box form-group">
+                                            <span class="details">Email</span>
+                                            <input class="form-control" name="email" type="email" placeholder="Enter your email">
+                                        </div>
+                                        <!-- Input for Address -->
+                                        <div class="input-box form-group">
+                                            <span class="details">Address<i class="text-danger">*</i></span>
+                                            <input class="form-control" name="address" type="text" placeholder="Enter your address" required="">
+                                        </div>
+                                        <br>
+                                        <!-- Input for City -->
+                                        <div class="radio-input-box form-group">
+                                            <span class="details">Choose Your Delivery Location<i class="text-danger">*</i></span>
+                                            <br>
+                                            <input name="city" type="radio" id="dhaka" value="Inside Dhaka" checked="">
+                                            <label for="dhaka">Inside Dhaka</label>
+                                            <br>
+                                            <input name="city" type="radio" id="outside" value="Outside Dhaka">
+                                            <label for="outside">Outside Dhaka</label>
+                                            <br><br>
+                                            <i>
+                                                <p class="text-muted">* Delivery Charge Inside Dhaka 80 ৳</p>
+                                                <p class="text-muted">* Delivery Charge Outside Dhaka 150 ৳</p>
+                                            </i>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 text-left">
-                                    <div>
-                                        <h4>Your Order</h4>
-                                        <br>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="order-list">
-                                                    <div class="order-titles">
-                                                        <h5>Products</h5>
-                                                        <h5>Subtotal</h5>
-                                                    </div><hr>
-                                                    <div class="order-items" id="order-items">
-                                                        <!-- Cart item will add dynamically -->
+                            </div>
 
-                                                    </div>
-                                                    
-                                                    <div class="subtotal">
-                                                        <div class="subtotal-title">Subtotal</div>
-                                                        <div class="subtotal-price amount" id="subtotal-price">৳ </div>
-                                                    </div><br>
-                                                    <div class="shipping">
-                                                        <div class="shipping-title">Shipping</div>
-                                                        <div class="shipping-price amount" id="shipping-price">৳ </div>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="total-product-price">
-                                                        <div class="total-product-price-title">Total</div>
-                                                        <div class="total-product-price-price amount" id="total-price">৳ </div>
-                                                    </div>
+                            <!-- Order Summary and Payment Section -->
+                            <div class="col-md-6 text-left">
+                                <div>
+                                    <h4>Your Order</h4>
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="order-list">
+                                                <div class="order-titles">
+                                                    <h5>Products</h5>
+                                                    <h5>Subtotal</h5>
+                                                </div>
+                                                <hr>
+                                                <div class="order-items" id="order-items">
+                                                    <!-- Cart items will be added dynamically -->
+                                                </div>
+                                                <div class="subtotal">
+                                                    <div class="subtotal-title">Subtotal</div>
+                                                    <div class="subtotal-price amount" id="subtotal-price">৳ </div>
+                                                </div>
+                                                <br>
+                                                <div class="shipping">
+                                                    <div class="shipping-title">Shipping</div>
+                                                    <div class="shipping-price amount" id="shipping-price">৳ </div>
+                                                </div>
+                                                <hr>
+                                                <div class="total-product-price">
+                                                    <div class="total-product-price-title">Total</div>
+                                                    <div class="total-product-price-price amount" id="total-price">৳ </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <br><br>
-                                    <div>
-                                        <h4>Payment Method</h4>
-                                        <br>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="payment-method">
-                                                    <div class="payment-method-title">
-                                                        <h5>Choose Your Payment Method</h5><br>
-                                                        <!-- <p>We Accept Cash On Delivery & Mobile Banking.</p> -->
-                                                        <p>We Accept Cash On Delivery Only</p>
-                                                    </div>
-                                                    <div class="payment-method-list">
-                                                        <!-- <input type="radio" id="bkash" name="payment" value="bkash" checked="">
-                                                        <label for="bkash">bKash</label><br>
-                                                        <input type="radio" id="rocket" name="payment" value="rocket">
-                                                        <label for="rocket">Rocket</label><br>
-                                                        <input type="radio" id="nagad" name="payment" value="nagad">
-                                                        <label for="nagad">Nagad</label><br> -->
+                                </div>
+                                <br><br>
+                                <div>
+                                    <h4>Payment Method</h4>
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="payment-method">
+                                                <div class="payment-method-title">
+                                                    <h5>Choose Your Payment Method</h5><br>
+                                                    <p>We Accept Cash On Delivery & Mobile Banking.</p>
+                                                </div>
+                                                <div class="payment-method-list">
 
-                                                        <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery" checked>
-                                                        <label for="cash-on-delivery">Cash on Delivery</label><br>
-                                                    </div>
+                                                    <input type="radio" id="cash-on-delivery" name="payment" value="Cash On Delivery" checked>
+                                                    <label for="cash-on-delivery">Cash on Delivery</label><br>
+
+                                                    <input type="radio" id="bkash" name="payment" value="bKash">
+                                                    <label for="bkash">bKash</label><br>
+
+                                                    <input type="radio" id="rocket" name="payment" value="Rocket">
+                                                    <label for="rocket">Rocket</label><br>
+
+                                                    <input type="radio" id="nagad" name="payment" value="Nagad">
+                                                    <label for="nagad">Nagad</label><br>
+
                                                 </div>
+                                            </div>
+                                            <br>
+                                            <!-- Payment Details Section -->
+                                            <div id="payment-details" style="display: none;">
+                                                <div>
+                                                *You Need To Send Us The <b style="color: red;">Total</b> Amount*
                                                 <br>
-                                                <div class="checkout-btn">
-                                                    <button type="submit" class="btn btn-primary">Place Order</button>
+                                                Account Number: <b style="color: red;"><?php echo $accNum;?></b>
+                                                </div><br>
+                                                <div class="form-group">
+                                                    <label for="accNum">Enter Account Number</label>
+                                                    <input class="form-control" name="accNum" type="text" placeholder="Enter your account number">
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="transactionID">Enter Transaction ID</label>
+                                                    <input class="form-control" name="transactionID" type="text" placeholder="Enter your transaction ID">
+                                                </div>
+                                            </div>
+                                            <div class="checkout-btn">
+                                                <button type="submit" class="btn btn-primary">Place Order</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </form>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const paymentRadios = document.querySelectorAll('input[name="payment"]');
+        const paymentDetails = document.getElementById('payment-details');
+
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.value !== 'Cash On Delivery') {
+                    paymentDetails.style.display = 'block';
+                } else {
+                    paymentDetails.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
         <!-- Checkout End -->
     
 
@@ -539,10 +564,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <h3><i class="fa fa-phone"></i><?php echo $websitePhone; ?></h3>
                             <a class="btn" href="#">Contact Us</a>
                             <div class="social">
-                                <a href="<?php echo $websiteTwitterLink; ?>"><i class="fab fa-twitter"></i></a>
-                                <a href="<?php echo $websiteFbLink; ?>"><i class="fab fa-facebook"></i></a>
-                                <a href="<?php echo $websiteInstaLink; ?>"><i class="fab fa-instagram"></i></a>
-                                <a href="<?php echo $websiteYtLink; ?>"><i class="fab fa-youtube"></i></a>
+                                <a target="_blank" href="<?php echo $websiteTwitterLink; ?>"><i class="fab fa-twitter"></i></a>
+                                <a target="_blank" href="<?php echo $websiteFbLink; ?>"><i class="fab fa-facebook"></i></a>
+                                <a target="_blank" href="<?php echo $websiteInstaLink; ?>"><i class="fab fa-instagram"></i></a>
+                                <a target="_blank" href="<?php echo $websiteYtLink; ?>"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>

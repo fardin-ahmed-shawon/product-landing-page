@@ -71,7 +71,8 @@ $info = $infoResult->fetch_assoc();
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-md-8">
-                        <h4>Update Logo and Favicon</h4>
+                        <div class="card card-body p-5">
+                        <h4>Update Logo and Favicon</h4><br><br>
                         <form method="POST" action="" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="logo">Logo</label>
@@ -83,11 +84,14 @@ $info = $infoResult->fetch_assoc();
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <h4>Preview</h4>
+                        <div class="card card-body p-5">
+                        <h4>Preview</h4><br><br>
                         <p><strong>Logo:</strong> <img src="<?= $info['logo'] ?? '#' ?>" alt="Logo" style="max-width: 100px;"></p>
                         <p><strong>Favicon:</strong> <img src="<?= $info['fav'] ?? '#' ?>" alt="Favicon" style="max-width: 50px;"></p>
+                        </div>
                     </div>
                 </div>
             </div>
