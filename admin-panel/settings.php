@@ -87,10 +87,19 @@ include('../dbConnection.php');
 
                                         <div class="col-md-4">
                                             <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
-                                                <h6>Logo & Favicon</h6>
-                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your logo and favicon</small>
+                                                <h6>Logo</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your logo</small>
                                                 <br>
-                                                <a class="btn btn-dark" href="edit-logo-fav.php">Change</a>
+                                                <a class="btn btn-dark" href="edit-logo.php">Change</a>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Favicon</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your favicon</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="edit-favicon.php">Change</a>
                                             </article>
                                         </div>
 
@@ -104,6 +113,15 @@ include('../dbConnection.php');
                                                 <small class="text-muted d-block" style="width: 70%">You can change all of your images by clicking here</small>
                                                 <br>
                                                 <a class="btn btn-dark" href="change-images.php">Edit</a>
+                                            </article>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <article class="box mb-3 bg-light p-3" style="border: 1px solid #ddd;">
+                                                <h6>Video</h6>
+                                                <small class="text-muted d-block" style="width: 70%">You can reset or change your video</small>
+                                                <br>
+                                                <a class="btn btn-dark" href="add-video.php">Change</a>
                                             </article>
                                         </div>
 

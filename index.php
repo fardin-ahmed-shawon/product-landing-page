@@ -16,21 +16,31 @@ $websiteInstaLink = $websiteInfo['insta_link'] ?? '#';
 $websiteTwitterLink = $websiteInfo['twitter_link'] ?? '#';
 $websiteYtLink = $websiteInfo['yt_link'] ?? '#';
 
-$websiteLogo = $websiteInfo['logo'] ?? '#';
-$websiteFav = $websiteInfo['fav'] ?? '#';
+// Logo and Favicon
+$websiteLogo = $websiteInfo['logo'] ?? '';
+$websiteFav = $websiteInfo['fav'] ?? '';
 
 
-if ($websiteLogo == '#') {
+if ($websiteLogo == '') {
     $websiteLogo = 'img/233esx.png';
 } else {
     $websiteLogo = $websiteInfo['logo'];
 }
 
-if ($websiteFav == '#') {
+if ($websiteFav == '') {
     $websiteFav = 'img/233esx.png';
 } else {
     $websiteFav = $websiteInfo['fav'];
 }
+
+// Delivery Information
+$inside_location = $websiteInfo['inside_location'] ?? 'Dhaka';
+$inside_delivery_charge = $websiteInfo['inside_delivery_charge'] ?? '80';
+$outside_delivery_charge = $websiteInfo['outside_delivery_charge'] ?? '150';
+
+// Video location
+$vdo = $websiteInfo['vdo_location'] ?? '';
+
 
 ?>
 <!DOCTYPE html>
@@ -243,6 +253,24 @@ if ($websiteFav == '#') {
             </div>
         </div>
         <!-- Feature End-->
+
+        <!-- Video -->
+        <?php
+            if ($vdo != '') {
+                ?>
+                <div>
+                    <div class="container">
+                    <video width="100%" controls>
+                        <source src="admin-panel/<?php echo $vdo; ?>" type="video/mp4">
+                        <source src="mov_bbb.ogg" type="video/ogg">
+                        Your browser does not support HTML video.
+                    </video>
+                    </div>
+                </div>
+                <?php
+            } 
+        ?>
+        <!-- End -->
         
         
         <!-- Products Start -->
@@ -388,8 +416,8 @@ if ($websiteFav == '#') {
                                             <label for="outside">Outside Dhaka</label>
                                             <br><br>
                                             <i>
-                                                <p class="text-muted">* Delivery Charge Inside Dhaka 80 ৳</p>
-                                                <p class="text-muted">* Delivery Charge Outside Dhaka 150 ৳</p>
+                                                <p class="text-muted">* Delivery Charge Inside <?php echo $inside_location; ?> <?php echo $inside_delivery_charge; ?> ৳</p>
+                                                <p class="text-muted">* Delivery Charge Outside <?php echo $inside_location; ?> <?php echo $outside_delivery_charge; ?> ৳</p>
                                             </i>
                                         </div>
                                     </div>
@@ -473,7 +501,7 @@ if ($websiteFav == '#') {
                                                     <label for="transactionID">Enter Transaction ID</label>
                                                     <input class="form-control" name="transactionID" type="text" placeholder="Enter your transaction ID">
                                                 </div>
-                                            </div>
+                                            </div><br>
                                             <div class="checkout-btn">
                                                 <button type="submit" class="btn btn-primary">Place Order</button>
                                             </div>
@@ -578,9 +606,9 @@ if ($websiteFav == '#') {
                     let shippingPrice = 0;
 
                     if (selectedCity === "Inside Dhaka") {
-                        shippingPrice = 80;
+                        shippingPrice = <?php echo $inside_delivery_charge; ?>;
                     } else if (selectedCity === "Outside Dhaka") {
-                        shippingPrice = 150;
+                        shippingPrice = <?php echo $outside_delivery_charge; ?>;
                     }
 
                     // Update the shipping price in the DOM

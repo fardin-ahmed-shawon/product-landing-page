@@ -19,17 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    $fav = $info['fav'] ?? null;
-    if (!empty($_FILES['fav']['name'])) {
-        $fav = 'uploads/' . basename($_FILES['fav']['name']);
-        if (!move_uploaded_file($_FILES['fav']['tmp_name'], $fav)) {
-            $fav = $info['fav']; // Revert to the existing favicon if upload fails
-        }
-    }
+    // Check if a record exists
+    $checkQuery = "SELECT * FROM website_info WHERE id=1";
+    $result = $conn->query($checkQuery);
 
-    // Update logo and favicon in the database
-    $updateQuery = "UPDATE website_info SET logo='$logo', fav='$fav' WHERE id=1";
-    $conn->query($updateQuery);
+    if ($result->num_rows > 0) {
+        // Update existing record
+        $updateQuery = "UPDATE website_info SET logo='$logo' WHERE id=1";
+        $conn->query($updateQuery);
+    } else {
+        // Insert new record
+        $insertQuery = "INSERT INTO website_info (id, logo) VALUES (1, '$logo')";
+        $conn->query($insertQuery);
+    }
 }
 
 // Fetch data to display in the sidebar
@@ -72,15 +74,11 @@ $info = $infoResult->fetch_assoc();
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card card-body p-5">
-                        <h4>Update Logo and Favicon</h4><br><br>
+                        <h4>Update Logo</h4><br><br>
                         <form method="POST" action="" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="logo">Logo</label>
-                                <input type="file" class="form-control" id="logo" name="logo" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fav">Favicon</label>
-                                <input type="file" class="form-control" id="fav" name="fav" required>
+                                <input type="file" class="form-control" id="logo" name="logo">
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
@@ -90,7 +88,6 @@ $info = $infoResult->fetch_assoc();
                         <div class="card card-body p-5">
                         <h4>Preview</h4><br><br>
                         <p><strong>Logo:</strong> <img src="<?= $info['logo'] ?? '#' ?>" alt="Logo" style="max-width: 100px;"></p>
-                        <p><strong>Favicon:</strong> <img src="<?= $info['fav'] ?? '#' ?>" alt="Favicon" style="max-width: 50px;"></p>
                         </div>
                     </div>
                 </div>
